@@ -192,3 +192,19 @@ To modify the merge behavior, edit `merge_university_data.py`:
 **Script Version:** 1.0  
 **Python Version:** 3.13+  
 **Required Package:** pandas 2.x
+
+
+
+
+#  Dataset Cleaning and Type Conversion
+
+ - **`change_type.py` script cleans the university dataset without changing the original column order. The cleaned dataset is saved as **`merged_university_data_cleaned.csv`**.
+
+## Main Changes
+
+- **`female_male_ratio` → `female_male_percent`**: Converted female-to-male ratio values into the percentage of female students (e.g., `24%` → `0.24`). The male percentage can be calculated later if needed.  
+- **Numeric columns converted**: Columns such as `world_rank`, `teaching`, `research`, `citations`, `income`, `total_score`, `num_students`, `student_staff_ratio`, `international_students`, and CWUR columns (`cwur_world_rank`, `cwur_quality_of_education`, `cwur_alumni_employment`, etc.) are now numeric (`int` or `float`) for easier analysis.  
+- **Value cleaning**: Percentages, commas, or numeric ranges were cleaned; any unparsable values were set to `NaN`.  
+
+The dataset keeps its original structure, is numerically usable, and ready for analysis or visualization.
+
