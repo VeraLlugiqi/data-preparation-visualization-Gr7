@@ -12,7 +12,7 @@ import pandas as pd
 import numpy as np
 import re
 
-INPUT = "merged_university_data.csv"
+INPUT = "../1st_step-merging/merged_university_data.csv"
 OUTPUT = "merged_university_data_cleaned.csv"
 
 # -------------------------------------------------------
