@@ -12,8 +12,8 @@ import pandas as pd
 import numpy as np
 import re
 
-INPUT = "../1st_step-merging/merged_university_data.csv"
-OUTPUT = "merged_university_data_cleaned.csv"
+INPUT = "../1st_step-merging/merged_university_data2.csv"
+OUTPUT = "merged_university_data_cleaned2.csv"
 
 # -------------------------------------------------------
 # Helper: extract first numeric value (handles %, commas, ranges)
