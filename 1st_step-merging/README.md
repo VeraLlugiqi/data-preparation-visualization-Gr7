@@ -52,6 +52,23 @@ Contains ranking positions across different criteria:
 
 **Note:** cwurData rankings represent positions (lower is better), while timesData scores represent performance (higher is better).
 
+### University Name Normalization and Merge Accuracy
+
+During the merging of Times and CWUR university datasets, some universities appeared as separate entries due to small differences in their names. Examples include:
+
+- "Ohio State University" vs "Ohio State University, Columbus"  
+- "University of Illinois at Urbana-Champaign" vs "University of Illinois at Urbana–Champaign"  
+- Differences in punctuation, accents, or added city names.
+
+To solve this, a normalization step was added before merging:
+
+- Names are converted to lowercase and stripped of leading/trailing whitespace.  
+- Punctuation is removed and city suffixes after commas are stripped.  
+- Accented characters are normalized to ASCII.  
+- Optionally, fuzzy matching can be used to catch less obvious differences.
+
+This ensures that each university is counted as a single row in the merged dataset, improving merge quality and avoiding duplicate or fragmented records.
+
 ## 🔄 Merge Process
 
 ### How It Works
