@@ -98,8 +98,8 @@ def show_examples(df, col_original, col_norm, patterns, sample=20):
 def main():
     print("Starting merge process...")
 
-    times_df = pd.read_csv("../timesData.csv")
-    cwur_df = pd.read_csv("../cwurData.csv")
+    times_df = pd.read_csv("../../timesData.csv")
+    cwur_df = pd.read_csv("../../cwurData.csv")
 
     # Normalize and clean names
     times_df["_norm_name"] = times_df["university_name"].apply(clean_for_merge)
@@ -210,7 +210,7 @@ def main():
     merged_df = merged_df[final_columns]
     merged_df = merged_df.fillna("-")
 
-    output_file = "merged_university_data2.csv"
+    output_file = "merged_university_data.csv"
     merged_df.to_csv(output_file, index=False)
 
     print(f"\nMerge completed successfully! Output saved to: {output_file}")
