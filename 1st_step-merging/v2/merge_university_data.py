@@ -29,20 +29,15 @@ def clean_for_merge(name):
     s = re.sub(r"[\u200B-\u200F\uFEFF]", "", s)  # remove invisible chars
     s = s.lower().strip()
 
-    # Replace all dash-like characters with spaces
     dash_pattern = r"[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D-]"  # all dash unicode
     s = re.sub(dash_pattern, " ", s)
 
-    # Remove parentheses and their content
     s = re.sub(r"\(.*?\)", "", s)
 
-    # Remove trailing campus/city suffixes like ", Cambridge" or "- Bloomington"
     s = re.sub(r"[,|-]\s*[^,|-]*$", "", s)
 
-    # Remove punctuation except spaces and ampersand
     s = re.sub(r"[^\w\s&]", "", s)
 
-    # Collapse extra spaces
     s = re.sub(r"\s+", " ", s).strip()
 
     # Canonical replacements for known duplicates
