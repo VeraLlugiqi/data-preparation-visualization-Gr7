@@ -4,7 +4,7 @@ import os
 
 # Load cleaned dataset
 df = pd.read_csv(
-    "C:\\Users\\NB\\Desktop\\Master\\Data preparation and visualization\\Faza 1\\data-preparation-visualization-Gr7\\4th-step-data_cleaning\\cleaned_university_data.csv"
+    "C:\\Users\\NB\\Desktop\\Master\\Data preparation and visualization\\Faza 1\\data-preparation-visualization-Gr7\\4th_step-data_cleaning\\cleaned_university_data.csv"
 )
 
 

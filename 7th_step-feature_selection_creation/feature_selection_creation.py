@@ -3,7 +3,7 @@ import numpy as np
 from pathlib import Path
 
 # Load the cleaned dataset
-df = pd.read_csv(Path("../4th-step-data_cleaning/cleaned_university_data.csv"))
+df = pd.read_csv(Path("../4th_step-data_cleaning/cleaned_university_data.csv"))
 
 
 to_drop = ["cwur_national_rank", "cwur_broad_impact", "cwur_patents"]

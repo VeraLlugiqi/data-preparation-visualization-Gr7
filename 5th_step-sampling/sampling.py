@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent
-INPUT_FILE = BASE_DIR.parent / "4th-step-data_cleaning" / "cleaned_university_data.csv"
+INPUT_FILE = BASE_DIR.parent / "4th_step-data_cleaning" / "cleaned_university_data.csv"
 OUTPUT_FILE = BASE_DIR / "sampled_dataset.csv"
 
 
