@@ -3,10 +3,7 @@ import numpy as np
 import os
 
 # Load cleaned dataset
-df = pd.read_csv(
-    "C:\\Users\\NB\\Desktop\\Master\\Data preparation and visualization\\Faza 1\\data-preparation-visualization-Gr7\\4th_step-data_cleaning\\cleaned_university_data.csv"
-)
-
+df = pd.read_csv("../4th_step-data_cleaning/cleaned_university_data.csv")
 
 country_replacements = {"USA": "United States of America"}
 df["country"] = df["country"].replace(country_replacements)
@@ -87,4 +84,3 @@ output_dir = os.getcwd()
 country_year_summary.to_csv(
     os.path.join(output_dir, "country_year_summary.csv"), index=False
 )
-
