@@ -1,4 +1,4 @@
-# 🧩 5th Step – Data Aggregation (by Country and Year)
+# 5th Step – Data Aggregation (by Country and Year)
 
 
 This script aggregates a cleaned dataset of university rankings (from THE and CWUR) by **country** and **year**.  

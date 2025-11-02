@@ -2,7 +2,7 @@
 
 This project merges two university ranking datasets into a single comprehensive file while preserving data integrity and handling missing values gracefully.
 
-## 📁 Files
+## Files
 
 ### Input Files
 - **`timesData.csv`** - Times Higher Education World University Rankings
@@ -14,7 +14,7 @@ This project merges two university ranking datasets into a single comprehensive 
 ### Script
 - **`merge_university_data.py`** - Python script that performs the merge operation
 
-## 📊 Dataset Information
+## Dataset Information
 
 ### timesData.csv Columns (14)
 Contains performance scores and metrics:
@@ -69,7 +69,7 @@ To solve this, a normalization step was added before merging:
 
 This ensures that each university is counted as a single row in the merged dataset, improving merge quality and avoiding duplicate or fragmented records.
 
-## 🔄 Merge Process
+## Merge Process
 
 ### How It Works
 1. **Reads both CSV files** using pandas
@@ -89,7 +89,7 @@ Records are matched based on:
 - **Year** (exact match)
 - **University name** (normalized for matching)
 
-## 📋 Output Structure
+## Output Structure
 
 ### merged_university_data.csv (25 columns)
 
@@ -113,7 +113,7 @@ cwur_influence, cwur_citations, cwur_broad_impact, cwur_patents, cwur_score
 - **Year 2016**: All cwur columns show `-` (no cwurData available for 2016)
 - **Unmatched universities**: cwur columns show `-` even in years 2012-2015
 
-## 🚀 Usage
+## Usage
 
 ### Prerequisites
 ```bash
@@ -151,7 +151,7 @@ Merge complete!
 Output shape: (2603, 25)
 ```
 
-## 📈 Statistics
+## Statistics
 
 - **Total records:** 2,603 (same as timesData)
 - **Total columns:** 25
@@ -162,17 +162,17 @@ Output shape: (2603, 25)
   - cwurData: 2012-2015
   - merged: 2011-2016 (with gaps filled by `-`)
 
-## 🎯 Key Features
+## Key Features
 
-✅ **Preserves timesData order** - Original sequence maintained  
-✅ **No duplicate columns** - Institution and country not duplicated  
-✅ **Handles missing years** - 2011 and 2016 preserved with `-` for cwur columns  
-✅ **Intelligent matching** - Normalizes names for better match rates  
-✅ **Clear empty indicators** - Uses `-` instead of blank cells  
-✅ **Non-destructive** - Original files remain unchanged  
-✅ **Automatic dependencies** - Installs pandas if needed (with user confirmation)
+- **Preserves timesData order** - Original sequence maintained  
+- **No duplicate columns** - Institution and country not duplicated  
+- **Handles missing years** - 2011 and 2016 preserved with `-` for cwur columns  
+- **Intelligent matching** - Normalizes names for better match rates  
+- **Clear empty indicators** - Uses `-` instead of blank cells  
+- **Non-destructive** - Original files remain unchanged  
+- **Automatic dependencies** - Installs pandas if needed (with user confirmation)
 
-## 💡 Use Cases
+## Use Cases
 
 This merged dataset is useful for:
 - **Comprehensive analysis** of university rankings across different methodologies
@@ -181,7 +181,7 @@ This merged dataset is useful for:
 - **Identifying** universities that perform well in both ranking systems
 - **Research** on higher education metrics and evaluation methods
 
-## ⚠️ Important Notes
+## Important Notes
 
 1. **Different metrics:** timesData uses scores (higher is better), cwurData uses rankings (lower is better)
 2. **Country names:** May vary between datasets (e.g., "USA" vs "United States of America")
@@ -189,7 +189,7 @@ This merged dataset is useful for:
 4. **Year availability:** 2011 has no cwur data, 2016 has no cwur data
 5. **Original files:** The merge script does NOT modify the original CSV files
 
-## 🔧 Customization
+## Customization
 
 To modify the merge behavior, edit `merge_university_data.py`:
 
@@ -198,7 +198,7 @@ To modify the merge behavior, edit `merge_university_data.py`:
 - **Add more normalizations:** Update `normalize_university_name()` function (line 18)
 - **Include dropped columns:** Modify the `cwur_df.drop()` line (line 72)
 
-## 📝 Data Sources
+## Data Sources
 
 - **Times Higher Education (THE)** - World University Rankings
 - **Center for World University Rankings (CWUR)** - Global university rankings

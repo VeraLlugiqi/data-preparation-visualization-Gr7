@@ -66,7 +66,7 @@ Years in filtered data: [2012, 2013, 2014, 2015]
 Removed ~900 records (~35%)
 Kept ~1700 records (~65%)
 
-✓ Filtered dataset saved to: filtered_university_data.csv
+Filtered dataset saved to: filtered_university_data.csv
 ```
 
 ## Data Statistics

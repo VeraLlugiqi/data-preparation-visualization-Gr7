@@ -2,15 +2,14 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-# Load the cleaned dataset
 df = pd.read_csv(Path("../4th_step-data_cleaning/cleaned_university_data.csv"))
 
 
 to_drop = ["cwur_national_rank", "cwur_broad_impact", "cwur_patents"]
 df = df.drop(columns=[c for c in to_drop if c in df.columns], errors="ignore")
 
-# Feature Creation ---
-# Rank gap (THE vs CWUR)
+
+# Rank gap (Times vs CWUR)
 df["rank_gap"] = df["world_rank"] - df["cwur_world_rank"]
 
 # Research efficiency (scaled so it’s readable when rounded) 
@@ -40,4 +39,4 @@ if "research_efficiency_per_1k" in rounded.columns:
 rounded = rounded.round(2)
 
 rounded.to_csv(out_path, index=False)
-print(f"💾 Saved: {out_path.resolve()}")
+print(f"Saved: {out_path.resolve()}")

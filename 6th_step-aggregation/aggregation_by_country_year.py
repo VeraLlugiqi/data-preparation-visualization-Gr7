@@ -2,26 +2,21 @@ import pandas as pd
 import numpy as np
 import os
 
-# Load cleaned dataset
 df = pd.read_csv("../4th_step-data_cleaning/cleaned_university_data.csv")
 
 country_replacements = {"USA": "United States of America"}
 df["country"] = df["country"].replace(country_replacements)
 
 
-# Drop rows missing essential keys ---
 df = df.dropna(subset=["country", "year"])
 
-# Rank difference between Times and CWUR
 df["rank_gap"] = df["world_rank"] - df["cwur_world_rank"]
 
-# Faculty efficiency
 df["faculty_efficiency"] = df["cwur_quality_of_faculty"] / df[
     "student_staff_ratio"
 ].replace({0: np.nan})
 
 
-# Global influence index (z-score within each year)
 def zscore(s):
     return (s - s.mean()) / s.std(ddof=0)
 
@@ -62,13 +57,11 @@ agg = {
 
 country_year_summary = df.groupby(["country", "year"]).agg(agg).reset_index()
 
-# Flatten MultiIndex columns
 country_year_summary.columns = [
     "_".join([c for c in col if c]).rstrip("_")
     for col in country_year_summary.columns.values
 ]
 
-# Rename key columns for readability
 rename_map = {
     "world_rank_min": "the_best_world_rank",
     "cwur_world_rank_min": "the_best_cwur_world_rank",

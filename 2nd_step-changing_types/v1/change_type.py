@@ -119,7 +119,7 @@ def main():
 
     # Save cleaned data
     df.to_csv(OUTPUT, index=False)
-    print(f"\n✅ Saved cleaned dataset to: {OUTPUT}")
+    print(f"\nSaved cleaned dataset to: {OUTPUT}")
     print("Final shape:", df.shape)
 
     # Preview

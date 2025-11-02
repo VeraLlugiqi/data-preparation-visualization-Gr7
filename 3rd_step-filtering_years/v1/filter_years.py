@@ -62,7 +62,7 @@ def main():
     
     # Save filtered dataset
     df_filtered.to_csv(output_file, index=False)
-    print(f"\n✓ Filtered dataset saved to: {output_file}")
+    print(f"\nFiltered dataset saved to: {output_file}")
     
     # Display sample of filtered data
     print(f"\nSample of filtered data (first 5 records):")

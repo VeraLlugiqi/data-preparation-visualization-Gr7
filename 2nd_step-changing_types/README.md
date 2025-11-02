@@ -47,8 +47,8 @@ The script outputs:
 ## Result
 
 The cleaned dataset:
-- ✅ Maintains original column order (except `female_male_ratio` replacement)
-- ✅ All numeric columns are proper numeric types for calculations
-- ✅ Ready for statistical analysis and visualization
-- ✅ Missing values are properly represented as `NaN`
+- Maintains original column order (except `female_male_ratio` replacement)
+- All numeric columns are proper numeric types for calculations
+- Ready for statistical analysis and visualization
+- Missing values are properly represented as `NaN`
 
