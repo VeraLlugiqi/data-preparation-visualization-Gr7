@@ -1,0 +1,2 @@
+total_records,outliers_detected,outliers_percentage,mean_anomaly_score_outliers,mean_anomaly_score_inliers,min_anomaly_score,max_anomaly_score,features_used
+2895,290,10.01727115716753,-0.5577951420196303,-0.3912920297006204,-0.6792455185819218,-0.3241660296063878,15
