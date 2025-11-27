@@ -5,7 +5,7 @@ from pathlib import Path
 print("Hapi 10: Mënjanimi i Zbulimeve Jo të Sakta")
 print("=" * 70)
 
-input_path = Path("C:/Users/NB/Desktop/Master/Data preparation and visualization/Faza 1/data-preparation-visualization-Gr7/8th-step-discret_binar_transform/university_data_discretized_transformed.csv")
+input_path = Path("../9th_step-outlier_detection/isolation_forest/outliers_isolation_forest.csv")
 
 if not input_path.exists():
     print(f"Gabim: Skedari {input_path} nuk u gjet!")
