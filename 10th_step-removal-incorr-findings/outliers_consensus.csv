@@ -1,0 +1,538 @@
+entity_id,in_zscore,in_iqr,in_isolation_forest,methods_flagged,university_name,country,year
+Aberystwyth University | United Kingdom | 2014,1,1,0,2,Aberystwyth University,United Kingdom,2014
+Aberystwyth University | United Kingdom | 2015,1,1,0,2,Aberystwyth University,United Kingdom,2015
+Alexandria University | Egypt | 2012,1,1,1,3,Alexandria University,Egypt,2012
+Alexandria University | Egypt | 2014,1,1,1,3,Alexandria University,Egypt,2014
+Alexandria University | Egypt | 2015,1,1,1,3,Alexandria University,Egypt,2015
+Arizona State University | United States of America | 2012,1,1,0,2,Arizona State University,United States of America,2012
+Arizona State University | United States of America | 2013,1,1,0,2,Arizona State University,United States of America,2013
+Arizona State University | United States of America | 2014,1,1,0,2,Arizona State University,United States of America,2014
+Arizona State University | United States of America | 2015,1,1,0,2,Arizona State University,United States of America,2015
+Aston University | United Kingdom | 2012,1,1,0,2,Aston University,United Kingdom,2012
+Aston University | United Kingdom | 2015,1,1,0,2,Aston University,United Kingdom,2015
+Auburn University | USA | 2014,1,1,0,2,Auburn University,USA,2014
+Auburn University | USA | 2015,1,1,0,2,Auburn University,USA,2015
+Auburn University | United States of America | 2012,1,1,0,2,Auburn University,United States of America,2012
+Australian National University | Australia | 2012,1,1,1,3,Australian National University,Australia,2012
+Australian National University | Australia | 2013,1,1,1,3,Australian National University,Australia,2013
+Australian National University | Australia | 2014,0,1,1,2,Australian National University,Australia,2014
+Australian National University | Australia | 2015,0,1,1,2,Australian National University,Australia,2015
+Bar-Ilan University | Israel | 2014,1,1,0,2,Bar-Ilan University,Israel,2014
+Bar-Ilan University | Israel | 2015,1,1,0,2,Bar-Ilan University,Israel,2015
+Bielefeld University | Germany | 2012,1,1,0,2,Bielefeld University,Germany,2012
+Bielefeld University | Germany | 2013,1,1,0,2,Bielefeld University,Germany,2013
+Bielefeld University | Germany | 2014,1,1,0,2,Bielefeld University,Germany,2014
+Bielefeld University | Germany | 2015,1,1,0,2,Bielefeld University,Germany,2015
+Bilkent University | Turkey | 2014,1,1,0,2,Bilkent University,Turkey,2014
+Bilkent University | Turkey | 2015,1,1,0,2,Bilkent University,Turkey,2015
+"Birkbeck, University of London | United Kingdom | 2014",1,1,0,2,"Birkbeck, University of London",United Kingdom,2014
+"Birkbeck, University of London | United Kingdom | 2015",1,1,0,2,"Birkbeck, University of London",United Kingdom,2015
+Boğaziçi University | Turkey | 2014,1,1,0,2,Boğaziçi University,Turkey,2014
+Boğaziçi University | Turkey | 2015,1,1,1,3,Boğaziçi University,Turkey,2015
+California Institute of Technology | United States of America | 2012,1,1,1,3,California Institute of Technology,United States of America,2012
+California Institute of Technology | United States of America | 2013,1,1,1,3,California Institute of Technology,United States of America,2013
+California Institute of Technology | United States of America | 2014,1,1,1,3,California Institute of Technology,United States of America,2014
+California Institute of Technology | United States of America | 2015,1,1,1,3,California Institute of Technology,United States of America,2015
+Carleton University | Canada | 2014,1,1,0,2,Carleton University,Canada,2014
+Carleton University | Canada | 2015,1,1,0,2,Carleton University,Canada,2015
+Carnegie Mellon University | United States of America | 2012,0,1,1,2,Carnegie Mellon University,United States of America,2012
+Carnegie Mellon University | United States of America | 2013,1,1,1,3,Carnegie Mellon University,United States of America,2013
+Carnegie Mellon University | United States of America | 2014,0,1,1,2,Carnegie Mellon University,United States of America,2014
+Carnegie Mellon University | United States of America | 2015,0,1,1,2,Carnegie Mellon University,United States of America,2015
+Charles Darwin University | Australia | 2014,1,1,0,2,Charles Darwin University,Australia,2014
+Charles Darwin University | Australia | 2015,1,1,0,2,Charles Darwin University,Australia,2015
+Charles University in Prague | Czech Republic | 2012,1,1,0,2,Charles University in Prague,Czech Republic,2012
+"China Medical University, Taiwan | Taiwan | 2014",1,1,0,2,"China Medical University, Taiwan",Taiwan,2014
+Columbia University | United States of America | 2012,1,1,1,3,Columbia University,United States of America,2012
+Columbia University | United States of America | 2013,1,1,1,3,Columbia University,United States of America,2013
+Columbia University | United States of America | 2014,1,1,1,3,Columbia University,United States of America,2014
+Columbia University | United States of America | 2015,1,1,1,3,Columbia University,United States of America,2015
+Cornell University | United States of America | 2012,1,1,1,3,Cornell University,United States of America,2012
+Cornell University | United States of America | 2013,1,1,1,3,Cornell University,United States of America,2013
+Cornell University | United States of America | 2014,1,1,1,3,Cornell University,United States of America,2014
+Cornell University | United States of America | 2015,1,1,1,3,Cornell University,United States of America,2015
+Creighton University | United States of America | 2014,0,1,1,2,Creighton University,United States of America,2014
+Creighton University | United States of America | 2015,0,1,1,2,Creighton University,United States of America,2015
+Dartmouth College | United States of America | 2014,0,1,1,2,Dartmouth College,United States of America,2014
+Dartmouth College | United States of America | 2015,1,1,1,3,Dartmouth College,United States of America,2015
+Duke University | United States of America | 2012,0,1,1,2,Duke University,United States of America,2012
+Duke University | United States of America | 2013,0,1,1,2,Duke University,United States of America,2013
+Duke University | United States of America | 2014,0,1,1,2,Duke University,United States of America,2014
+Duke University | United States of America | 2015,0,1,1,2,Duke University,United States of America,2015
+ETH Zurich – Swiss Federal Institute of Technology Zurich | Switzerland | 2012,1,1,1,3,ETH Zurich – Swiss Federal Institute of Technology Zurich,Switzerland,2012
+ETH Zurich – Swiss Federal Institute of Technology Zurich | Switzerland | 2013,1,1,1,3,ETH Zurich – Swiss Federal Institute of Technology Zurich,Switzerland,2013
+ETH Zurich – Swiss Federal Institute of Technology Zurich | Switzerland | 2014,1,1,1,3,ETH Zurich – Swiss Federal Institute of Technology Zurich,Switzerland,2014
+ETH Zurich – Swiss Federal Institute of Technology Zurich | Switzerland | 2015,1,1,1,3,ETH Zurich – Swiss Federal Institute of Technology Zurich,Switzerland,2015
+Emory University | United States of America | 2014,1,1,0,2,Emory University,United States of America,2014
+Federico Santa María Technical University | Chile | 2014,0,1,1,2,Federico Santa María Technical University,Chile,2014
+Federico Santa María Technical University | Chile | 2015,1,1,1,3,Federico Santa María Technical University,Chile,2015
+Florida Institute of Technology | United States of America | 2014,1,1,1,3,Florida Institute of Technology,United States of America,2014
+Florida Institute of Technology | United States of America | 2015,1,1,1,3,Florida Institute of Technology,United States of America,2015
+Georgia Institute of Technology | United States of America | 2013,0,1,1,2,Georgia Institute of Technology,United States of America,2013
+Harvard University | United States of America | 2012,1,1,1,3,Harvard University,United States of America,2012
+Harvard University | United States of America | 2013,1,1,1,3,Harvard University,United States of America,2013
+Harvard University | United States of America | 2014,1,1,1,3,Harvard University,United States of America,2014
+Harvard University | United States of America | 2015,1,1,1,3,Harvard University,United States of America,2015
+Hebrew University of Jerusalem | Israel | 2012,0,1,1,2,Hebrew University of Jerusalem,Israel,2012
+Heriot-Watt University | United Kingdom | 2012,1,1,1,3,Heriot-Watt University,United Kingdom,2012
+Heriot-Watt University | United Kingdom | 2013,1,1,0,2,Heriot-Watt University,United Kingdom,2013
+Heriot-Watt University | United Kingdom | 2014,1,1,1,3,Heriot-Watt University,United Kingdom,2014
+Heriot-Watt University | United Kingdom | 2015,1,1,0,2,Heriot-Watt University,United Kingdom,2015
+Hong Kong Baptist University | Hong Kong | 2014,1,1,0,2,Hong Kong Baptist University,Hong Kong,2014
+Hong Kong Baptist University | Hong Kong | 2015,1,1,0,2,Hong Kong Baptist University,Hong Kong,2015
+Hong Kong University of Science and Technology | Hong Kong | 2012,0,1,1,2,Hong Kong University of Science and Technology,Hong Kong,2012
+Hong Kong University of Science and Technology | Hong Kong | 2014,0,1,1,2,Hong Kong University of Science and Technology,Hong Kong,2014
+Hong Kong University of Science and Technology | Hong Kong | 2015,0,1,1,2,Hong Kong University of Science and Technology,Hong Kong,2015
+Humboldt University of Berlin | Germany | 2012,1,1,0,2,Humboldt University of Berlin,Germany,2012
+Humboldt University of Berlin | Germany | 2013,1,1,0,2,Humboldt University of Berlin,Germany,2013
+Humboldt University of Berlin | Germany | 2014,1,1,0,2,Humboldt University of Berlin,Germany,2014
+Humboldt University of Berlin | Germany | 2015,1,1,0,2,Humboldt University of Berlin,Germany,2015
+Imperial College London | United Kingdom | 2012,1,1,1,3,Imperial College London,United Kingdom,2012
+Imperial College London | United Kingdom | 2013,1,1,1,3,Imperial College London,United Kingdom,2013
+Imperial College London | United Kingdom | 2014,1,1,1,3,Imperial College London,United Kingdom,2014
+Imperial College London | United Kingdom | 2015,1,1,1,3,Imperial College London,United Kingdom,2015
+Indian Institute of Science | India | 2014,0,1,1,2,Indian Institute of Science,India,2014
+Indian Institute of Science | India | 2015,0,1,1,2,Indian Institute of Science,India,2015
+Indiana University | United States of America | 2012,1,1,0,2,Indiana University,United States of America,2012
+Indiana University | United States of America | 2013,1,1,0,2,Indiana University,United States of America,2013
+Indiana University | United States of America | 2014,1,1,0,2,Indiana University,United States of America,2014
+Indiana University | United States of America | 2015,1,1,0,2,Indiana University,United States of America,2015
+Isfahan University of Technology | Iran | 2015,1,1,0,2,Isfahan University of Technology,Iran,2015
+Istanbul Technical University | Turkey | 2014,1,1,0,2,Istanbul Technical University,Turkey,2014
+Istanbul Technical University | Turkey | 2015,1,1,0,2,Istanbul Technical University,Turkey,2015
+Johannes Kepler University of Linz | Austria | 2014,1,1,0,2,Johannes Kepler University of Linz,Austria,2014
+Johns Hopkins University | United States of America | 2012,1,1,1,3,Johns Hopkins University,United States of America,2012
+Johns Hopkins University | United States of America | 2013,1,1,1,3,Johns Hopkins University,United States of America,2013
+Johns Hopkins University | United States of America | 2014,1,1,1,3,Johns Hopkins University,United States of America,2014
+Johns Hopkins University | United States of America | 2015,1,1,1,3,Johns Hopkins University,United States of America,2015
+Karolinska Institute | Sweden | 2012,1,1,1,3,Karolinska Institute,Sweden,2012
+Karolinska Institute | Sweden | 2013,0,1,1,2,Karolinska Institute,Sweden,2013
+Karolinska Institute | Sweden | 2014,0,1,1,2,Karolinska Institute,Sweden,2014
+Karolinska Institute | Sweden | 2015,0,1,1,2,Karolinska Institute,Sweden,2015
+Keele University | United Kingdom | 2014,1,1,0,2,Keele University,United Kingdom,2014
+Keio University | Japan | 2012,0,1,1,2,Keio University,Japan,2012
+Keio University | Japan | 2013,1,1,0,2,Keio University,Japan,2013
+Keio University | Japan | 2014,0,1,1,2,Keio University,Japan,2014
+Keio University | Japan | 2015,0,1,1,2,Keio University,Japan,2015
+King Abdulaziz University | Saudi Arabia | 2014,1,1,1,3,King Abdulaziz University,Saudi Arabia,2014
+King Mongkut’s University of Technology Thonburi | Thailand | 2013,1,1,0,2,King Mongkut’s University of Technology Thonburi,Thailand,2013
+Korea Advanced Institute of Science and Technology (KAIST) | South Korea | 2013,1,1,1,3,Korea Advanced Institute of Science and Technology (KAIST),South Korea,2013
+Korea Advanced Institute of Science and Technology (KAIST) | South Korea | 2014,0,1,1,2,Korea Advanced Institute of Science and Technology (KAIST),South Korea,2014
+Korea Advanced Institute of Science and Technology (KAIST) | South Korea | 2015,0,1,1,2,Korea Advanced Institute of Science and Technology (KAIST),South Korea,2015
+Korea University | South Korea | 2013,1,1,0,2,Korea University,South Korea,2013
+Kyoto University | Japan | 2012,0,1,1,2,Kyoto University,Japan,2012
+Kyoto University | Japan | 2013,1,1,1,3,Kyoto University,Japan,2013
+Kyoto University | Japan | 2014,1,1,1,3,Kyoto University,Japan,2014
+Kyoto University | Japan | 2015,1,1,1,3,Kyoto University,Japan,2015
+Kyung Hee University | South Korea | 2012,1,1,0,2,Kyung Hee University,South Korea,2012
+Kyung Hee University | South Korea | 2014,1,1,0,2,Kyung Hee University,South Korea,2014
+Kyung Hee University | South Korea | 2015,1,1,0,2,Kyung Hee University,South Korea,2015
+Kyushu University | Japan | 2014,0,1,1,2,Kyushu University,Japan,2014
+Kyushu University | Japan | 2015,1,1,1,3,Kyushu University,Japan,2015
+La Trobe University | Australia | 2012,1,1,0,2,La Trobe University,Australia,2012
+La Trobe University | Australia | 2014,1,1,0,2,La Trobe University,Australia,2014
+La Trobe University | Australia | 2015,1,1,0,2,La Trobe University,Australia,2015
+Leibniz University of Hanover | Germany | 2012,1,1,0,2,Leibniz University of Hanover,Germany,2012
+Leibniz University of Hanover | Germany | 2013,1,1,0,2,Leibniz University of Hanover,Germany,2013
+Leibniz University of Hanover | Germany | 2014,1,1,0,2,Leibniz University of Hanover,Germany,2014
+Liverpool John Moores University | United Kingdom | 2014,1,1,0,2,Liverpool John Moores University,United Kingdom,2014
+Lomonosov Moscow State University | Russian Federation | 2012,1,1,0,2,Lomonosov Moscow State University,Russian Federation,2012
+Lomonosov Moscow State University | Russian Federation | 2013,1,1,1,3,Lomonosov Moscow State University,Russian Federation,2013
+Lomonosov Moscow State University | Russian Federation | 2014,1,1,0,2,Lomonosov Moscow State University,Russian Federation,2014
+Lomonosov Moscow State University | Russian Federation | 2015,0,1,1,2,Lomonosov Moscow State University,Russian Federation,2015
+London School of Economics and Political Science | United Kingdom | 2014,1,1,0,2,London School of Economics and Political Science,United Kingdom,2014
+Loughborough University | United Kingdom | 2012,1,1,0,2,Loughborough University,United Kingdom,2012
+Loughborough University | United Kingdom | 2014,1,1,0,2,Loughborough University,United Kingdom,2014
+Maastricht University | Netherlands | 2012,1,1,0,2,Maastricht University,Netherlands,2012
+Maastricht University | Netherlands | 2013,1,1,0,2,Maastricht University,Netherlands,2013
+Maastricht University | Netherlands | 2014,1,1,0,2,Maastricht University,Netherlands,2014
+Maastricht University | Netherlands | 2015,1,1,0,2,Maastricht University,Netherlands,2015
+Macquarie University | Australia | 2012,1,1,0,2,Macquarie University,Australia,2012
+Macquarie University | Australia | 2013,1,1,0,2,Macquarie University,Australia,2013
+Macquarie University | Australia | 2014,1,1,0,2,Macquarie University,Australia,2014
+Macquarie University | Australia | 2015,1,1,0,2,Macquarie University,Australia,2015
+Mahidol University | Thailand | 2012,1,1,0,2,Mahidol University,Thailand,2012
+Massachusetts Institute of Technology | United States of America | 2012,1,1,1,3,Massachusetts Institute of Technology,United States of America,2012
+Massachusetts Institute of Technology | United States of America | 2013,1,1,1,3,Massachusetts Institute of Technology,United States of America,2013
+Massachusetts Institute of Technology | United States of America | 2014,1,1,1,3,Massachusetts Institute of Technology,United States of America,2014
+Massachusetts Institute of Technology | United States of America | 2015,1,1,1,3,Massachusetts Institute of Technology,United States of America,2015
+McGill University | Canada | 2012,0,1,1,2,McGill University,Canada,2012
+Medical University of Vienna | Austria | 2013,1,1,1,3,Medical University of Vienna,Austria,2013
+Medical University of Vienna | Austria | 2014,1,1,1,3,Medical University of Vienna,Austria,2014
+Medical University of Vienna | Austria | 2015,1,1,1,3,Medical University of Vienna,Austria,2015
+Middle East Technical University | Turkey | 2015,1,1,0,2,Middle East Technical University,Turkey,2015
+Mines ParisTech | France | 2012,1,1,1,3,Mines ParisTech,France,2012
+Mines ParisTech | France | 2013,1,1,1,3,Mines ParisTech,France,2013
+Mines ParisTech | France | 2014,1,1,1,3,Mines ParisTech,France,2014
+Mines ParisTech | France | 2015,1,1,1,3,Mines ParisTech,France,2015
+Monash University | Australia | 2012,0,1,1,2,Monash University,Australia,2012
+Monash University | Australia | 2013,0,1,1,2,Monash University,Australia,2013
+Monash University | Australia | 2014,0,1,1,2,Monash University,Australia,2014
+Monash University | Australia | 2015,0,1,1,2,Monash University,Australia,2015
+Murdoch University | Australia | 2013,1,1,0,2,Murdoch University,Australia,2013
+Murdoch University | Australia | 2014,1,1,1,3,Murdoch University,Australia,2014
+Murdoch University | Australia | 2015,1,1,1,3,Murdoch University,Australia,2015
+Nanyang Technological University | Singapore | 2013,1,1,0,2,Nanyang Technological University,Singapore,2013
+Nanyang Technological University | Singapore | 2015,1,1,0,2,Nanyang Technological University,Singapore,2015
+National Autonomous University of Mexico | Mexico | 2013,1,1,0,2,National Autonomous University of Mexico,Mexico,2013
+National Autonomous University of Mexico | Mexico | 2014,1,1,1,3,National Autonomous University of Mexico,Mexico,2014
+National Autonomous University of Mexico | Mexico | 2015,1,1,1,3,National Autonomous University of Mexico,Mexico,2015
+National Central University | Taiwan | 2012,1,1,0,2,National Central University,Taiwan,2012
+National Chiao Tung University | Taiwan | 2012,1,1,0,2,National Chiao Tung University,Taiwan,2012
+National Research Nuclear University MePhI | Russian Federation | 2013,1,1,1,3,National Research Nuclear University MePhI,Russian Federation,2013
+National Sun Yat-Sen University | Taiwan | 2012,1,1,0,2,National Sun Yat-Sen University,Taiwan,2012
+National Sun Yat-Sen University | Taiwan | 2014,1,1,0,2,National Sun Yat-Sen University,Taiwan,2014
+National Sun Yat-Sen University | Taiwan | 2015,1,1,0,2,National Sun Yat-Sen University,Taiwan,2015
+National Taiwan Ocean University | Taiwan | 2012,1,1,0,2,National Taiwan Ocean University,Taiwan,2012
+National Taiwan Ocean University | Taiwan | 2014,0,1,1,2,National Taiwan Ocean University,Taiwan,2014
+National Taiwan Ocean University | Taiwan | 2015,0,1,1,2,National Taiwan Ocean University,Taiwan,2015
+National Taiwan University of Science and Technology (Taiwan Tech) | Taiwan | 2012,1,1,1,3,National Taiwan University of Science and Technology (Taiwan Tech),Taiwan,2012
+National Taiwan University of Science and Technology (Taiwan Tech) | Taiwan | 2014,1,1,1,3,National Taiwan University of Science and Technology (Taiwan Tech),Taiwan,2014
+National Taiwan University of Science and Technology (Taiwan Tech) | Taiwan | 2015,1,1,1,3,National Taiwan University of Science and Technology (Taiwan Tech),Taiwan,2015
+National Taiwan University | Taiwan | 2012,1,1,1,3,National Taiwan University,Taiwan,2012
+National Taiwan University | Taiwan | 2013,0,1,1,2,National Taiwan University,Taiwan,2013
+National Taiwan University | Taiwan | 2015,0,1,1,2,National Taiwan University,Taiwan,2015
+National Tsing Hua University | Taiwan | 2012,1,1,0,2,National Tsing Hua University,Taiwan,2012
+"National University of Ireland, Galway | Republic of Ireland | 2014",1,1,0,2,"National University of Ireland, Galway",Republic of Ireland,2014
+"National University of Ireland, Galway | Republic of Ireland | 2015",1,1,0,2,"National University of Ireland, Galway",Republic of Ireland,2015
+"National University of Ireland, Maynooth | Republic of Ireland | 2014",1,1,0,2,"National University of Ireland, Maynooth",Republic of Ireland,2014
+National University of Singapore | Singapore | 2013,1,1,1,3,National University of Singapore,Singapore,2013
+National University of Singapore | Singapore | 2014,0,1,1,2,National University of Singapore,Singapore,2014
+National University of Singapore | Singapore | 2015,1,1,1,3,National University of Singapore,Singapore,2015
+New University of Lisbon | Portugal | 2012,1,1,0,2,New University of Lisbon,Portugal,2012
+New York University | United States of America | 2012,0,1,1,2,New York University,United States of America,2012
+New York University | United States of America | 2013,0,1,1,2,New York University,United States of America,2013
+New York University | United States of America | 2014,1,1,1,3,New York University,United States of America,2014
+New York University | United States of America | 2015,0,1,1,2,New York University,United States of America,2015
+Northeastern University | United States of America | 2015,1,1,1,3,Northeastern University,United States of America,2015
+Northwestern University | United States of America | 2013,1,1,1,3,Northwestern University,United States of America,2013
+Northwestern University | United States of America | 2014,0,1,1,2,Northwestern University,United States of America,2014
+Northwestern University | United States of America | 2015,0,1,1,2,Northwestern University,United States of America,2015
+Novosibirsk State University | Russia | 2014,1,1,1,3,Novosibirsk State University,Russia,2014
+Novosibirsk State University | Russian Federation | 2015,1,1,1,3,Novosibirsk State University,Russian Federation,2015
+Old Dominion University | United States of America | 2014,1,1,0,2,Old Dominion University,United States of America,2014
+Osaka University | Japan | 2012,0,1,1,2,Osaka University,Japan,2012
+Osaka University | Japan | 2014,0,1,1,2,Osaka University,Japan,2014
+Peking University | China | 2012,1,1,1,3,Peking University,China,2012
+Peking University | China | 2013,1,1,1,3,Peking University,China,2013
+Peking University | China | 2014,1,1,1,3,Peking University,China,2014
+Peking University | China | 2015,1,1,1,3,Peking University,China,2015
+Pohang University of Science and Technology | South Korea | 2012,1,1,1,3,Pohang University of Science and Technology,South Korea,2012
+Pohang University of Science and Technology | South Korea | 2013,1,1,1,3,Pohang University of Science and Technology,South Korea,2013
+Pohang University of Science and Technology | South Korea | 2014,1,1,1,3,Pohang University of Science and Technology,South Korea,2014
+Pohang University of Science and Technology | South Korea | 2015,1,1,1,3,Pohang University of Science and Technology,South Korea,2015
+Pontifical Catholic University of Chile | Chile | 2012,1,1,0,2,Pontifical Catholic University of Chile,Chile,2012
+Princeton University | United States of America | 2012,1,1,1,3,Princeton University,United States of America,2012
+Princeton University | United States of America | 2013,1,1,1,3,Princeton University,United States of America,2013
+Princeton University | United States of America | 2014,1,1,1,3,Princeton University,United States of America,2014
+Princeton University | United States of America | 2015,1,1,1,3,Princeton University,United States of America,2015
+Queen Mary University of London | United Kingdom | 2012,1,1,0,2,Queen Mary University of London,United Kingdom,2012
+Queen Mary University of London | United Kingdom | 2013,1,1,0,2,Queen Mary University of London,United Kingdom,2013
+Queen Mary University of London | United Kingdom | 2014,1,1,0,2,Queen Mary University of London,United Kingdom,2014
+Queen Mary University of London | United Kingdom | 2015,1,1,0,2,Queen Mary University of London,United Kingdom,2015
+Queensland University of Technology | Australia | 2014,1,1,0,2,Queensland University of Technology,Australia,2014
+Queensland University of Technology | Australia | 2015,1,1,0,2,Queensland University of Technology,Australia,2015
+Royal College of Surgeons in Ireland | Ireland | 2014,1,1,1,3,Royal College of Surgeons in Ireland,Ireland,2014
+Royal College of Surgeons in Ireland | Republic of Ireland | 2015,1,1,1,3,Royal College of Surgeons in Ireland,Republic of Ireland,2015
+"Royal Holloway, University of London | United Kingdom | 2014",1,1,1,3,"Royal Holloway, University of London",United Kingdom,2014
+"Royal Holloway, University of London | United Kingdom | 2015",1,1,1,3,"Royal Holloway, University of London",United Kingdom,2015
+Ruhr University Bochum | Germany | 2012,1,1,0,2,Ruhr University Bochum,Germany,2012
+Ruhr University Bochum | Germany | 2013,1,1,0,2,Ruhr University Bochum,Germany,2013
+Ruhr University Bochum | Germany | 2014,1,1,0,2,Ruhr University Bochum,Germany,2014
+Ruhr University Bochum | Germany | 2015,1,1,0,2,Ruhr University Bochum,Germany,2015
+"Rutgers, the State University of New Jersey | United States of America | 2014",1,1,0,2,"Rutgers, the State University of New Jersey",United States of America,2014
+"Rutgers, the State University of New Jersey | United States of America | 2015",1,1,0,2,"Rutgers, the State University of New Jersey",United States of America,2015
+Saint Petersburg State University | Russia | 2014,1,1,1,3,Saint Petersburg State University,Russia,2014
+Saint Petersburg State University | Russia | 2015,1,1,1,3,Saint Petersburg State University,Russia,2015
+Saint Petersburg State University | Russian Federation | 2012,1,1,0,2,Saint Petersburg State University,Russian Federation,2012
+Sapienza University of Rome | Italy | 2012,1,1,1,3,Sapienza University of Rome,Italy,2012
+Sapienza University of Rome | Italy | 2013,1,1,1,3,Sapienza University of Rome,Italy,2013
+Sapienza University of Rome | Italy | 2014,1,1,1,3,Sapienza University of Rome,Italy,2014
+Sapienza University of Rome | Italy | 2015,1,1,1,3,Sapienza University of Rome,Italy,2015
+Scuola Normale Superiore di Pisa | Italy | 2014,1,1,1,3,Scuola Normale Superiore di Pisa,Italy,2014
+Scuola Normale Superiore di Pisa | Italy | 2015,1,1,1,3,Scuola Normale Superiore di Pisa,Italy,2015
+Seoul National University | South Korea | 2013,1,1,0,2,Seoul National University,South Korea,2013
+Seoul National University | South Korea | 2014,1,1,1,3,Seoul National University,South Korea,2014
+Seoul National University | South Korea | 2015,1,1,1,3,Seoul National University,South Korea,2015
+Sharif University of Technology | Iran | 2012,1,1,0,2,Sharif University of Technology,Iran,2012
+Sharif University of Technology | Iran | 2013,1,1,0,2,Sharif University of Technology,Iran,2013
+Sharif University of Technology | Iran | 2014,1,1,0,2,Sharif University of Technology,Iran,2014
+Sharif University of Technology | Iran | 2015,1,1,0,2,Sharif University of Technology,Iran,2015
+Stanford University | United States of America | 2012,1,1,1,3,Stanford University,United States of America,2012
+Stanford University | United States of America | 2013,1,1,1,3,Stanford University,United States of America,2013
+Stanford University | United States of America | 2014,1,1,1,3,Stanford University,United States of America,2014
+Stanford University | United States of America | 2015,1,1,1,3,Stanford University,United States of America,2015
+State University of Campinas | Brazil | 2012,1,1,0,2,State University of Campinas,Brazil,2012
+State University of Campinas | Brazil | 2013,1,1,0,2,State University of Campinas,Brazil,2013
+Sungkyunkwan University (SKKU) | South Korea | 2013,1,1,0,2,Sungkyunkwan University (SKKU),South Korea,2013
+Swedish University of Agricultural Sciences | Sweden | 2012,1,1,0,2,Swedish University of Agricultural Sciences,Sweden,2012
+Swedish University of Agricultural Sciences | Sweden | 2013,1,1,1,3,Swedish University of Agricultural Sciences,Sweden,2013
+Swedish University of Agricultural Sciences | Sweden | 2014,1,1,1,3,Swedish University of Agricultural Sciences,Sweden,2014
+Swedish University of Agricultural Sciences | Sweden | 2015,1,1,1,3,Swedish University of Agricultural Sciences,Sweden,2015
+Swinburne University of Technology | Australia | 2014,1,1,0,2,Swinburne University of Technology,Australia,2014
+Swinburne University of Technology | Australia | 2015,1,1,0,2,Swinburne University of Technology,Australia,2015
+Swiss Federal Institute of Technology in Zurich | Switzerland | 2014,1,1,0,2,Swiss Federal Institute of Technology in Zurich,Switzerland,2014
+Technical University of Darmstadt | Germany | 2012,1,1,0,2,Technical University of Darmstadt,Germany,2012
+Technical University of Darmstadt | Germany | 2013,1,1,0,2,Technical University of Darmstadt,Germany,2013
+Technical University of Darmstadt | Germany | 2014,1,1,0,2,Technical University of Darmstadt,Germany,2014
+Technical University of Darmstadt | Germany | 2015,1,1,0,2,Technical University of Darmstadt,Germany,2015
+Technical University of Denmark | Denmark | 2012,1,1,0,2,Technical University of Denmark,Denmark,2012
+Technical University of Denmark | Denmark | 2013,1,1,0,2,Technical University of Denmark,Denmark,2013
+Technical University of Denmark | Denmark | 2014,1,1,0,2,Technical University of Denmark,Denmark,2014
+Technical University of Denmark | Denmark | 2015,1,1,0,2,Technical University of Denmark,Denmark,2015
+Tilburg University | Netherlands | 2012,0,1,1,2,Tilburg University,Netherlands,2012
+Tilburg University | Netherlands | 2014,1,1,0,2,Tilburg University,Netherlands,2014
+Tilburg University | Netherlands | 2015,1,1,0,2,Tilburg University,Netherlands,2015
+Tohoku University | Japan | 2014,1,1,1,3,Tohoku University,Japan,2014
+Tohoku University | Japan | 2015,1,1,1,3,Tohoku University,Japan,2015
+Tokyo Medical and Dental University (TMDU) | Japan | 2012,1,1,1,3,Tokyo Medical and Dental University (TMDU),Japan,2012
+Tokyo Medical and Dental University (TMDU) | Japan | 2013,1,1,1,3,Tokyo Medical and Dental University (TMDU),Japan,2013
+Tokyo Medical and Dental University (TMDU) | Japan | 2014,1,1,1,3,Tokyo Medical and Dental University (TMDU),Japan,2014
+Tokyo Medical and Dental University (TMDU) | Japan | 2015,1,1,1,3,Tokyo Medical and Dental University (TMDU),Japan,2015
+Tokyo Metropolitan University | Japan | 2012,1,1,1,3,Tokyo Metropolitan University,Japan,2012
+Tokyo Metropolitan University | Japan | 2013,1,1,1,3,Tokyo Metropolitan University,Japan,2013
+Tokyo Metropolitan University | Japan | 2014,1,1,1,3,Tokyo Metropolitan University,Japan,2014
+Tokyo Metropolitan University | Japan | 2015,1,1,1,3,Tokyo Metropolitan University,Japan,2015
+Trinity College Dublin | Republic of Ireland | 2012,1,1,0,2,Trinity College Dublin,Republic of Ireland,2012
+Tsinghua University | China | 2012,0,1,1,2,Tsinghua University,China,2012
+Tsinghua University | China | 2014,1,1,0,2,Tsinghua University,China,2014
+University College London | United Kingdom | 2012,1,1,1,3,University College London,United Kingdom,2012
+University College London | United Kingdom | 2013,1,1,1,3,University College London,United Kingdom,2013
+University College London | United Kingdom | 2014,1,1,1,3,University College London,United Kingdom,2014
+University College London | United Kingdom | 2015,1,1,1,3,University College London,United Kingdom,2015
+University of Alaska Fairbanks | United States of America | 2014,1,1,1,3,University of Alaska Fairbanks,United States of America,2014
+University of Aveiro | Portugal | 2012,1,1,0,2,University of Aveiro,Portugal,2012
+University of Bari Aldo Moro | Italy | 2012,1,1,1,3,University of Bari Aldo Moro,Italy,2012
+University of Bari Aldo Moro | Italy | 2014,1,1,0,2,University of Bari Aldo Moro,Italy,2014
+University of Bari Aldo Moro | Italy | 2015,1,1,0,2,University of Bari Aldo Moro,Italy,2015
+University of Bologna | Italy | 2012,1,1,0,2,University of Bologna,Italy,2012
+University of Bologna | Italy | 2013,1,1,0,2,University of Bologna,Italy,2013
+University of Bologna | Italy | 2014,1,1,0,2,University of Bologna,Italy,2014
+University of Bologna | Italy | 2015,1,1,0,2,University of Bologna,Italy,2015
+University of Bonn | Germany | 2013,1,1,0,2,University of Bonn,Germany,2013
+University of Bonn | Germany | 2014,1,1,0,2,University of Bonn,Germany,2014
+University of Bonn | Germany | 2015,1,1,0,2,University of Bonn,Germany,2015
+University of British Columbia | Canada | 2012,0,1,1,2,University of British Columbia,Canada,2012
+University of British Columbia | Canada | 2013,0,1,1,2,University of British Columbia,Canada,2013
+University of British Columbia | Canada | 2014,0,1,1,2,University of British Columbia,Canada,2014
+University of British Columbia | Canada | 2015,0,1,1,2,University of British Columbia,Canada,2015
+"University of California, Berkeley | United States of America | 2012",1,1,1,3,"University of California, Berkeley",United States of America,2012
+"University of California, Berkeley | United States of America | 2013",1,1,1,3,"University of California, Berkeley",United States of America,2013
+"University of California, Berkeley | United States of America | 2014",1,1,1,3,"University of California, Berkeley",United States of America,2014
+"University of California, Berkeley | United States of America | 2015",1,1,1,3,"University of California, Berkeley",United States of America,2015
+"University of California, Davis | United States of America | 2013",0,1,1,2,"University of California, Davis",United States of America,2013
+"University of California, Davis | United States of America | 2014",1,1,1,3,"University of California, Davis",United States of America,2014
+"University of California, Davis | United States of America | 2015",1,1,1,3,"University of California, Davis",United States of America,2015
+"University of California, Irvine | United States of America | 2014",1,1,1,3,"University of California, Irvine",United States of America,2014
+"University of California, Irvine | United States of America | 2015",1,1,0,2,"University of California, Irvine",United States of America,2015
+"University of California, Los Angeles | United States of America | 2012",1,1,1,3,"University of California, Los Angeles",United States of America,2012
+"University of California, Los Angeles | United States of America | 2013",1,1,1,3,"University of California, Los Angeles",United States of America,2013
+"University of California, Los Angeles | United States of America | 2014",1,1,1,3,"University of California, Los Angeles",United States of America,2014
+"University of California, Los Angeles | United States of America | 2015",1,1,1,3,"University of California, Los Angeles",United States of America,2015
+"University of California, Riverside | United States of America | 2014",1,1,1,3,"University of California, Riverside",United States of America,2014
+"University of California, Riverside | United States of America | 2015",1,1,1,3,"University of California, Riverside",United States of America,2015
+"University of California, San Diego | United States of America | 2013",0,1,1,2,"University of California, San Diego",United States of America,2013
+"University of California, San Diego | United States of America | 2014",1,1,1,3,"University of California, San Diego",United States of America,2014
+"University of California, San Diego | United States of America | 2015",1,1,1,3,"University of California, San Diego",United States of America,2015
+"University of California, Santa Barbara | United States of America | 2012",1,1,1,3,"University of California, Santa Barbara",United States of America,2012
+"University of California, Santa Barbara | United States of America | 2015",1,1,1,3,"University of California, Santa Barbara",United States of America,2015
+"University of California, Santa Cruz | United States of America | 2014",0,1,1,2,"University of California, Santa Cruz",United States of America,2014
+University of Cambridge | United Kingdom | 2012,1,1,1,3,University of Cambridge,United Kingdom,2012
+University of Cambridge | United Kingdom | 2013,1,1,1,3,University of Cambridge,United Kingdom,2013
+University of Cambridge | United Kingdom | 2014,1,1,1,3,University of Cambridge,United Kingdom,2014
+University of Cambridge | United Kingdom | 2015,1,1,1,3,University of Cambridge,United Kingdom,2015
+University of Chicago | United States of America | 2012,1,1,1,3,University of Chicago,United States of America,2012
+University of Chicago | United States of America | 2013,1,1,1,3,University of Chicago,United States of America,2013
+University of Chicago | United States of America | 2014,1,1,1,3,University of Chicago,United States of America,2014
+University of Chicago | United States of America | 2015,1,1,1,3,University of Chicago,United States of America,2015
+University of Coimbra | Portugal | 2012,1,1,0,2,University of Coimbra,Portugal,2012
+University of Cologne | Germany | 2014,1,1,0,2,University of Cologne,Germany,2014
+University of Cologne | Germany | 2015,1,1,0,2,University of Cologne,Germany,2015
+University of Crete | Greece | 2012,1,1,0,2,University of Crete,Greece,2012
+University of Duisburg-Essen | Germany | 2013,1,1,0,2,University of Duisburg-Essen,Germany,2013
+University of Duisburg-Essen | Germany | 2014,1,1,0,2,University of Duisburg-Essen,Germany,2014
+University of Duisburg-Essen | Germany | 2015,1,1,0,2,University of Duisburg-Essen,Germany,2015
+University of Edinburgh | United Kingdom | 2012,0,1,1,2,University of Edinburgh,United Kingdom,2012
+University of Edinburgh | United Kingdom | 2015,0,1,1,2,University of Edinburgh,United Kingdom,2015
+University of Erlangen-Nuremberg | Germany | 2013,1,1,0,2,University of Erlangen-Nuremberg,Germany,2013
+University of Erlangen-Nuremberg | Germany | 2014,1,1,0,2,University of Erlangen-Nuremberg,Germany,2014
+University of Erlangen-Nuremberg | Germany | 2015,1,1,0,2,University of Erlangen-Nuremberg,Germany,2015
+University of Essex | United Kingdom | 2012,1,1,0,2,University of Essex,United Kingdom,2012
+University of Essex | United Kingdom | 2013,1,1,0,2,University of Essex,United Kingdom,2013
+University of Essex | United Kingdom | 2014,1,1,0,2,University of Essex,United Kingdom,2014
+University of Essex | United Kingdom | 2015,1,1,0,2,University of Essex,United Kingdom,2015
+University of Fribourg | Switzerland | 2013,1,1,0,2,University of Fribourg,Switzerland,2013
+University of Fribourg | Switzerland | 2014,1,1,0,2,University of Fribourg,Switzerland,2014
+University of Fribourg | Switzerland | 2015,1,1,0,2,University of Fribourg,Switzerland,2015
+University of Geneva | Switzerland | 2012,1,1,0,2,University of Geneva,Switzerland,2012
+University of Geneva | Switzerland | 2013,1,1,0,2,University of Geneva,Switzerland,2013
+University of Geneva | Switzerland | 2014,1,1,0,2,University of Geneva,Switzerland,2014
+University of Geneva | Switzerland | 2015,1,1,0,2,University of Geneva,Switzerland,2015
+University of Hertfordshire | United Kingdom | 2014,1,1,0,2,University of Hertfordshire,United Kingdom,2014
+University of Hong Kong | Hong Kong | 2012,0,1,1,2,University of Hong Kong,Hong Kong,2012
+University of Hong Kong | Hong Kong | 2013,1,1,1,3,University of Hong Kong,Hong Kong,2013
+University of Houston | United States of America | 2012,1,1,0,2,University of Houston,United States of America,2012
+University of Houston | United States of America | 2013,1,1,0,2,University of Houston,United States of America,2013
+University of Houston | United States of America | 2014,1,1,0,2,University of Houston,United States of America,2014
+University of Houston | United States of America | 2015,1,1,0,2,University of Houston,United States of America,2015
+University of Iceland | Iceland | 2012,1,1,0,2,University of Iceland,Iceland,2012
+University of Iceland | Iceland | 2013,1,1,0,2,University of Iceland,Iceland,2013
+University of Iceland | Iceland | 2014,1,1,0,2,University of Iceland,Iceland,2014
+University of Iceland | Iceland | 2015,1,1,0,2,University of Iceland,Iceland,2015
+University of Illinois at Urbana-Champaign | United States of America | 2012,0,1,1,2,University of Illinois at Urbana-Champaign,United States of America,2012
+University of Illinois at Urbana-Champaign | United States of America | 2013,1,1,1,3,University of Illinois at Urbana-Champaign,United States of America,2013
+University of Illinois at Urbana-Champaign | United States of America | 2014,0,1,1,2,University of Illinois at Urbana-Champaign,United States of America,2014
+University of Illinois at Urbana-Champaign | United States of America | 2015,0,1,1,2,University of Illinois at Urbana-Champaign,United States of America,2015
+University of Innsbruck | Austria | 2012,1,1,0,2,University of Innsbruck,Austria,2012
+University of Innsbruck | Austria | 2013,1,1,0,2,University of Innsbruck,Austria,2013
+University of Innsbruck | Austria | 2014,1,1,0,2,University of Innsbruck,Austria,2014
+University of Innsbruck | Austria | 2015,1,1,0,2,University of Innsbruck,Austria,2015
+University of Jyväskylä | Finland | 2015,1,1,0,2,University of Jyväskylä,Finland,2015
+University of Kent | United Kingdom | 2012,1,1,0,2,University of Kent,United Kingdom,2012
+University of Kent | United Kingdom | 2014,1,1,0,2,University of Kent,United Kingdom,2014
+University of Kent | United Kingdom | 2015,1,1,0,2,University of Kent,United Kingdom,2015
+University of Konstanz | Germany | 2012,1,1,0,2,University of Konstanz,Germany,2012
+University of Konstanz | Germany | 2013,1,1,0,2,University of Konstanz,Germany,2013
+University of Konstanz | Germany | 2014,1,1,0,2,University of Konstanz,Germany,2014
+University of Konstanz | Germany | 2015,1,1,0,2,University of Konstanz,Germany,2015
+"University of Maryland, Baltimore County | United States of America | 2012",0,1,1,2,"University of Maryland, Baltimore County",United States of America,2012
+"University of Maryland, College Park | United States of America | 2014",1,1,0,2,"University of Maryland, College Park",United States of America,2014
+University of Melbourne | Australia | 2012,1,1,1,3,University of Melbourne,Australia,2012
+University of Melbourne | Australia | 2013,1,1,1,3,University of Melbourne,Australia,2013
+University of Melbourne | Australia | 2014,1,1,1,3,University of Melbourne,Australia,2014
+University of Melbourne | Australia | 2015,1,1,1,3,University of Melbourne,Australia,2015
+University of Miami | United States of America | 2012,1,1,0,2,University of Miami,United States of America,2012
+University of Miami | United States of America | 2013,1,1,0,2,University of Miami,United States of America,2013
+University of Miami | United States of America | 2014,1,1,0,2,University of Miami,United States of America,2014
+University of Miami | United States of America | 2015,1,1,0,2,University of Miami,United States of America,2015
+University of Michigan | United States of America | 2012,1,1,1,3,University of Michigan,United States of America,2012
+University of Michigan | United States of America | 2013,1,1,1,3,University of Michigan,United States of America,2013
+University of Michigan | United States of America | 2014,1,1,1,3,University of Michigan,United States of America,2014
+University of Michigan | United States of America | 2015,1,1,1,3,University of Michigan,United States of America,2015
+University of Milan | Italy | 2012,1,1,0,2,University of Milan,Italy,2012
+University of Milan | Italy | 2013,1,1,0,2,University of Milan,Italy,2013
+University of Milan | Italy | 2014,1,1,0,2,University of Milan,Italy,2014
+University of Milan | Italy | 2015,1,1,0,2,University of Milan,Italy,2015
+University of Milan-Bicocca | Italy | 2012,1,1,1,3,University of Milan-Bicocca,Italy,2012
+University of Milan-Bicocca | Italy | 2013,1,1,0,2,University of Milan-Bicocca,Italy,2013
+University of Milan-Bicocca | Italy | 2014,1,1,0,2,University of Milan-Bicocca,Italy,2014
+University of Milan-Bicocca | Italy | 2015,1,1,0,2,University of Milan-Bicocca,Italy,2015
+University of Minho | Portugal | 2014,1,1,0,2,University of Minho,Portugal,2014
+University of Münster | Germany | 2012,1,1,0,2,University of Münster,Germany,2012
+University of Münster | Germany | 2013,1,1,0,2,University of Münster,Germany,2013
+University of Münster | Germany | 2014,1,1,0,2,University of Münster,Germany,2014
+University of Münster | Germany | 2015,1,1,0,2,University of Münster,Germany,2015
+University of Nebraska Medical Center | USA | 2014,1,1,1,3,University of Nebraska Medical Center,USA,2014
+University of Nebraska Medical Center | United States of America | 2015,1,1,1,3,University of Nebraska Medical Center,United States of America,2015
+University of Oxford | United Kingdom | 2012,1,1,1,3,University of Oxford,United Kingdom,2012
+University of Oxford | United Kingdom | 2013,1,1,1,3,University of Oxford,United Kingdom,2013
+University of Oxford | United Kingdom | 2014,1,1,1,3,University of Oxford,United Kingdom,2014
+University of Oxford | United Kingdom | 2015,1,1,1,3,University of Oxford,United Kingdom,2015
+University of Padua | Italy | 2012,1,1,0,2,University of Padua,Italy,2012
+University of Padua | Italy | 2013,1,1,0,2,University of Padua,Italy,2013
+University of Padua | Italy | 2014,1,1,0,2,University of Padua,Italy,2014
+University of Padua | Italy | 2015,1,1,0,2,University of Padua,Italy,2015
+University of Pennsylvania | United States of America | 2012,1,1,1,3,University of Pennsylvania,United States of America,2012
+University of Pennsylvania | United States of America | 2013,1,1,1,3,University of Pennsylvania,United States of America,2013
+University of Pennsylvania | United States of America | 2014,1,1,1,3,University of Pennsylvania,United States of America,2014
+University of Pennsylvania | United States of America | 2015,1,1,1,3,University of Pennsylvania,United States of America,2015
+University of Pittsburgh | United States of America | 2014,1,1,0,2,University of Pittsburgh,United States of America,2014
+University of Pittsburgh | United States of America | 2015,1,1,0,2,University of Pittsburgh,United States of America,2015
+University of Porto | Portugal | 2012,1,1,0,2,University of Porto,Portugal,2012
+University of Rome III | Italy | 2015,1,1,0,2,University of Rome III,Italy,2015
+University of Salento | Italy | 2012,1,1,0,2,University of Salento,Italy,2012
+University of Salento | Italy | 2013,1,1,0,2,University of Salento,Italy,2013
+University of Salento | Italy | 2014,1,1,0,2,University of Salento,Italy,2014
+University of Salento | Italy | 2015,1,1,0,2,University of Salento,Italy,2015
+University of Science and Technology of China | China | 2012,1,1,0,2,University of Science and Technology of China,China,2012
+University of Seoul | South Korea | 2015,1,1,0,2,University of Seoul,South Korea,2015
+University of South Australia | Australia | 2014,1,1,0,2,University of South Australia,Australia,2014
+University of South Australia | Australia | 2015,1,1,0,2,University of South Australia,Australia,2015
+University of St Andrews | United Kingdom | 2012,1,1,0,2,University of St Andrews,United Kingdom,2012
+University of St Andrews | United Kingdom | 2013,1,1,0,2,University of St Andrews,United Kingdom,2013
+University of St Andrews | United Kingdom | 2014,1,1,0,2,University of St Andrews,United Kingdom,2014
+University of St Andrews | United Kingdom | 2015,1,1,1,3,University of St Andrews,United Kingdom,2015
+University of Stirling | United Kingdom | 2014,1,1,0,2,University of Stirling,United Kingdom,2014
+University of Stirling | United Kingdom | 2015,1,1,0,2,University of Stirling,United Kingdom,2015
+University of Strathclyde | United Kingdom | 2012,1,1,0,2,University of Strathclyde,United Kingdom,2012
+University of Stuttgart | Germany | 2014,1,1,0,2,University of Stuttgart,Germany,2014
+University of Stuttgart | Germany | 2015,1,1,0,2,University of Stuttgart,Germany,2015
+University of Surrey | United Kingdom | 2012,1,1,0,2,University of Surrey,United Kingdom,2012
+University of Surrey | United Kingdom | 2013,1,1,0,2,University of Surrey,United Kingdom,2013
+University of Surrey | United Kingdom | 2015,1,1,0,2,University of Surrey,United Kingdom,2015
+University of Sydney | Australia | 2012,0,1,1,2,University of Sydney,Australia,2012
+University of São Paulo | Brazil | 2012,1,1,1,3,University of São Paulo,Brazil,2012
+University of São Paulo | Brazil | 2013,1,1,1,3,University of São Paulo,Brazil,2013
+University of São Paulo | Brazil | 2014,1,1,1,3,University of São Paulo,Brazil,2014
+University of São Paulo | Brazil | 2015,1,1,1,3,University of São Paulo,Brazil,2015
+University of Tartu | Estonia | 2012,1,1,0,2,University of Tartu,Estonia,2012
+University of Technology Sydney | Australia | 2013,1,1,0,2,University of Technology Sydney,Australia,2013
+University of Technology Sydney | Australia | 2014,1,1,0,2,University of Technology Sydney,Australia,2014
+University of Technology Sydney | Australia | 2015,1,1,0,2,University of Technology Sydney,Australia,2015
+University of Texas at Austin | United States of America | 2012,0,1,1,2,University of Texas at Austin,United States of America,2012
+University of Texas at Austin | United States of America | 2013,0,1,1,2,University of Texas at Austin,United States of America,2013
+University of Texas at Austin | United States of America | 2014,0,1,1,2,University of Texas at Austin,United States of America,2014
+University of Texas at Austin | United States of America | 2015,0,1,1,2,University of Texas at Austin,United States of America,2015
+University of Tokyo | Japan | 2012,1,1,1,3,University of Tokyo,Japan,2012
+University of Tokyo | Japan | 2013,1,1,1,3,University of Tokyo,Japan,2013
+University of Tokyo | Japan | 2014,1,1,1,3,University of Tokyo,Japan,2014
+University of Tokyo | Japan | 2015,1,1,1,3,University of Tokyo,Japan,2015
+University of Toronto | Canada | 2012,1,1,1,3,University of Toronto,Canada,2012
+University of Toronto | Canada | 2013,1,1,1,3,University of Toronto,Canada,2013
+University of Toronto | Canada | 2014,1,1,1,3,University of Toronto,Canada,2014
+University of Toronto | Canada | 2015,1,1,1,3,University of Toronto,Canada,2015
+University of Trento | Italy | 2012,1,1,0,2,University of Trento,Italy,2012
+University of Trento | Italy | 2013,1,1,0,2,University of Trento,Italy,2013
+University of Trento | Italy | 2014,1,1,0,2,University of Trento,Italy,2014
+University of Trento | Italy | 2015,1,1,0,2,University of Trento,Italy,2015
+University of Turin | Italy | 2013,1,1,0,2,University of Turin,Italy,2013
+University of Turin | Italy | 2014,1,1,1,3,University of Turin,Italy,2014
+University of Turin | Italy | 2015,1,1,1,3,University of Turin,Italy,2015
+University of Vigo | Spain | 2014,1,1,0,2,University of Vigo,Spain,2014
+University of Waikato | New Zealand | 2014,1,1,0,2,University of Waikato,New Zealand,2014
+University of Waikato | New Zealand | 2015,1,1,0,2,University of Waikato,New Zealand,2015
+University of Washington | United States of America | 2013,0,1,1,2,University of Washington,United States of America,2013
+University of Wisconsin-Madison | United States of America | 2012,0,1,1,2,University of Wisconsin-Madison,United States of America,2012
+University of Wisconsin-Madison | United States of America | 2013,0,1,1,2,University of Wisconsin-Madison,United States of America,2013
+University of Wisconsin-Madison | United States of America | 2014,0,1,1,2,University of Wisconsin-Madison,United States of America,2014
+University of Wisconsin-Madison | United States of America | 2015,0,1,1,2,University of Wisconsin-Madison,United States of America,2015
+"University of the Andes, Colombia | Colombia | 2013",1,1,0,2,"University of the Andes, Colombia",Colombia,2013
+Vienna University of Technology | Austria | 2012,1,1,0,2,Vienna University of Technology,Austria,2012
+Vienna University of Technology | Austria | 2013,1,1,0,2,Vienna University of Technology,Austria,2013
+Vienna University of Technology | Austria | 2014,1,1,0,2,Vienna University of Technology,Austria,2014
+Vienna University of Technology | Austria | 2015,1,1,0,2,Vienna University of Technology,Austria,2015
+Wake Forest University | United States of America | 2012,1,1,1,3,Wake Forest University,United States of America,2012
+Wake Forest University | United States of America | 2013,1,1,1,3,Wake Forest University,United States of America,2013
+Wake Forest University | United States of America | 2014,1,1,1,3,Wake Forest University,United States of America,2014
+Wake Forest University | United States of America | 2015,1,1,1,3,Wake Forest University,United States of America,2015
+Waseda University | Japan | 2012,0,1,1,2,Waseda University,Japan,2012
+Waseda University | Japan | 2014,0,1,1,2,Waseda University,Japan,2014
+Waseda University | Japan | 2015,1,1,1,3,Waseda University,Japan,2015
+Wuhan University of Technology | China | 2014,1,1,1,3,Wuhan University of Technology,China,2014
+Wuhan University of Technology | China | 2015,1,1,1,3,Wuhan University of Technology,China,2015
+Yale University | United States of America | 2012,1,1,1,3,Yale University,United States of America,2012
+Yale University | United States of America | 2013,1,1,1,3,Yale University,United States of America,2013
+Yale University | United States of America | 2014,1,1,1,3,Yale University,United States of America,2014
+Yale University | United States of America | 2015,1,1,1,3,Yale University,United States of America,2015
+Yeshiva University | United States of America | 2012,1,1,0,2,Yeshiva University,United States of America,2012
+Yeshiva University | United States of America | 2013,1,1,0,2,Yeshiva University,United States of America,2013
+Yeshiva University | United States of America | 2014,1,1,0,2,Yeshiva University,United States of America,2014
+Yeshiva University | United States of America | 2015,1,1,0,2,Yeshiva University,United States of America,2015
+Yonsei University | South Korea | 2013,1,1,0,2,Yonsei University,South Korea,2013
+Yuan Ze University | Taiwan | 2012,1,1,1,3,Yuan Ze University,Taiwan,2012
+Yuan Ze University | Taiwan | 2014,0,1,1,2,Yuan Ze University,Taiwan,2014
+Yuan Ze University | Taiwan | 2015,0,1,1,2,Yuan Ze University,Taiwan,2015
+École Normale Supérieure de Lyon | France | 2014,1,1,1,3,École Normale Supérieure de Lyon,France,2014
+École Normale Supérieure de Lyon | France | 2015,1,1,1,3,École Normale Supérieure de Lyon,France,2015
+École Normale Supérieure | France | 2012,1,1,1,3,École Normale Supérieure,France,2012
+École Normale Supérieure | France | 2013,1,1,1,3,École Normale Supérieure,France,2013
+École Normale Supérieure | France | 2014,1,1,1,3,École Normale Supérieure,France,2014
+École Normale Supérieure | France | 2015,1,1,1,3,École Normale Supérieure,France,2015
+École Polytechnique Fédérale de Lausanne | Switzerland | 2012,1,1,1,3,École Polytechnique Fédérale de Lausanne,Switzerland,2012
+École Polytechnique Fédérale de Lausanne | Switzerland | 2013,1,1,1,3,École Polytechnique Fédérale de Lausanne,Switzerland,2013
+École Polytechnique Fédérale de Lausanne | Switzerland | 2014,1,1,1,3,École Polytechnique Fédérale de Lausanne,Switzerland,2014
+École Polytechnique Fédérale de Lausanne | Switzerland | 2015,1,1,1,3,École Polytechnique Fédérale de Lausanne,Switzerland,2015
+École Polytechnique | France | 2012,1,1,1,3,École Polytechnique,France,2012
+École Polytechnique | France | 2013,1,1,1,3,École Polytechnique,France,2013
+École Polytechnique | France | 2014,1,1,1,3,École Polytechnique,France,2014
+École Polytechnique | France | 2015,1,1,1,3,École Polytechnique,France,2015

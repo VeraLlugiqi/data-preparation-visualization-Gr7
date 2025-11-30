@@ -1,128 +1,108 @@
 import pandas as pd
-import numpy as np
-from pathlib import Path
 
-print("Hapi 10: Mënjanimi i Zbulimeve Jo të Sakta")
+print("=" * 70)
+print("KRAHASIMI I METODAVE TË DETEKTIMIT TË PËRJASHTUESVE")
+print("Z-Score vs IQR vs Isolation Forest")
 print("=" * 70)
 
-input_path = Path("../9th_step-outlier_detection/isolation_forest/outliers_isolation_forest.csv")
+# 1. Leximi i fajllave të outliers dhe datasetit origjinal
+# RREGULLO PATH-IN NËSE DUHET (p.sh. '../final_dataset.csv')
+df_z = pd.read_csv('../9th_step-outlier_detection/zscore/outliers_zscore.csv')
+df_iqr = pd.read_csv('../9th_step-outlier_detection/iqr/outliers_iqr.csv')
+df_if = pd.read_csv('../9th_step-outlier_detection/isolation_forest/outliers_isolation_forest.csv')
+df_full = pd.read_csv('../final_dataset.csv')
 
-if not input_path.exists():
-    print(f"Gabim: Skedari {input_path} nuk u gjet!")
-    print("Sigurohuni që keni ekzekutuar Hapin 8 më parë.")
-    exit(1)
+# 2. Krijojmë një ID unike për çdo rresht: universitet | country | year
+def make_id(df):
+    return (
+        df['university_name'].astype(str) + " | " +
+        df['country'].astype(str) + " | " +
+        df['year'].astype(str)
+    )
 
-df = pd.read_csv(input_path)
-print(f"\nDataset i ngarkuar: {len(df)} rreshta, {len(df.columns)} kolona")
+df_z['entity_id'] = make_id(df_z)
+df_iqr['entity_id'] = make_id(df_iqr)
+df_if['entity_id'] = make_id(df_if)
+df_full['entity_id'] = make_id(df_full)
 
-print("\n1. KONTROLLIMI I VLERAVE NEGATIVE OSE ZERO")
+# 3. Marrim set-in unik të ID-ve për secilën metodë
+set_z = set(df_z['entity_id'].unique())
+set_iqr = set(df_iqr['entity_id'].unique())
+set_if = set(df_if['entity_id'].unique())
+
+print(f"Outliers (Z-score): {len(set_z)} raste unike")
+print(f"Outliers (IQR): {len(set_iqr)} raste unike")
+print(f"Outliers (Isolation Forest): {len(set_if)} raste unike\n")
+
+# 4. Krijojmë një listë me të gjitha ID-të që janë outlier në të paktën 1 metodë
+all_ids = sorted(set_z | set_iqr | set_if)
+
+rows = []
+for eid in all_ids:
+    in_z = int(eid in set_z)
+    in_i = int(eid in set_iqr)
+    in_if = int(eid in set_if)
+    total = in_z + in_i + in_if
+
+    rows.append({
+        'entity_id': eid,
+        'in_zscore': in_z,
+        'in_iqr': in_i,
+        'in_isolation_forest': in_if,
+        'methods_flagged': total
+    })
+
+comparison_df = pd.DataFrame(rows)
+
+# 5. Ndahet entity_id përsëri në kolonat origjinale për lehtësi
+comparison_df[['university_name', 'country', 'year']] = (
+    comparison_df['entity_id'].str.split(' \| ', expand=True)
+)
+comparison_df['year'] = comparison_df['year'].astype(int)
+
+# 6. Outliers të "vërtetë" = të kapur nga >= 2 metoda
+consensus_df = comparison_df[comparison_df['methods_flagged'] >= 2].copy()
+false_df = comparison_df[comparison_df['methods_flagged'] == 1].copy()
+
+print("PËRMBLEDHJE:")
 print("-" * 70)
+print(f"Totali i entiteteve (uni+vend+vit) që janë outlier në të paktën një metodë: {len(comparison_df)}")
+print(f"Outliers 'të vërtetë' (>=2 metoda): {len(consensus_df)}")
+print(f"Outliers të dyshimtë / jo të sakta (vetëm 1 metodë): {len(false_df)}\n")
 
-invalid_cols = [
-    "international",
-    "research",
-    "citations",
-    "num_students",
-    "student_staff_ratio",
-]
+# 7. Ruajmë fajllat e përmbledhjes
+comparison_df.to_csv('outliers_all_methods_comparison.csv', index=False)
+consensus_df.to_csv('outliers_consensus.csv', index=False)
+false_df.to_csv('outliers_false_detected.csv', index=False)
 
-for col in invalid_cols:
-    if col in df.columns:
-        invalid_rows = df[df[col] <= 0]
-        if len(invalid_rows) > 0:
-            print(f"Kolona '{col}' ka {len(invalid_rows)} vlera jo të sakta (<= 0).")
+print("✓ Ruajtur 'outliers_all_methods_comparison.csv'")
+print("✓ Ruajtur 'outliers_consensus.csv' (>= 2 metoda)")
+print("✓ Ruajtur 'outliers_false_detected.csv' (= 1 metodë)\n")
 
-df_clean = df.copy()
-for col in invalid_cols:
-    if col in df_clean.columns:
-        before = len(df_clean)
-        df_clean = df_clean[df_clean[col] > 0]
-        removed = before - len(df_clean)
-        if removed > 0:
-            print(f"  Hequr {removed} rreshta për shkak të kolonës '{col}'")
+# 8. Largimi i outliers nga final_dataset.csv
+#    (këtu po heqim OUTLIERS 'TË VËRTETË' = ata që dalin në >= 2 metoda)
 
-print("\n2. KONTROLLIMI I VLERAVE TË PAMUNDURA PËR INTERNATIONAL_STUDENTS")
+consensus_ids = set(consensus_df['entity_id'])
+
+df_full['is_outlier_consensus'] = df_full['entity_id'].isin(consensus_ids).astype(int)
+
+# Dataset i pastruar: pa outliers të konsensusit
+df_clean = df_full[df_full['is_outlier_consensus'] == 0].copy()
+
+# Hiq kolonën teknike entity_id në datasetin e pastruar
+df_clean = df_clean.drop(columns=['entity_id', 'is_outlier_consensus'])
+
+# Ruaj datasetin e pastruar
+df_clean.to_csv('final_dataset_no_outliers.csv', index=False)
+
+# Opsionale: ruaj edhe datasetin me flag për referencë
+df_full.to_csv('final_dataset_with_outlier_flags.csv', index=False)
+
+print("DATASET I PASTRUAR:")
 print("-" * 70)
-
-if "international_students" in df_clean.columns:
-    invalid_int_students = df_clean[df_clean["international_students"] > 1]
-    print(f"Vlera >1 në international_students: {len(invalid_int_students)}")
-    
-    if len(invalid_int_students) > 0:
-        before = len(df_clean)
-        df_clean = df_clean[df_clean["international_students"] <= 1]
-        removed = before - len(df_clean)
-        print(f"  Hequr {removed} rreshta me international_students > 1")
-
-print("\n3. HEQJA E RRESHTAVE DUPLIKATË")
-print("-" * 70)
-
-before = len(df_clean)
-duplicates = df_clean.duplicated().sum()
-print(f"Numri i rreshtave të përsëritur: {duplicates}")
-
-if duplicates > 0:
-    df_clean = df_clean.drop_duplicates()
-    print(f"  Hequr {duplicates} rreshta duplikatë")
-
-print("\n4. KONTROLLIMI I VLERAVE NULL (MUNGESË)")
-print("-" * 70)
-
-missing_per_col = df_clean.isna().sum()
-total_missing = missing_per_col.sum()
-print(f"Total vlera munguese: {total_missing}")
-
-if total_missing > 0:
-    cols_with_missing = missing_per_col[missing_per_col > 0]
-    print(f"\nKolonat me vlera munguese:")
-    for col, count in cols_with_missing.items():
-        pct = (count / len(df_clean)) * 100
-        print(f"  {col}: {count} ({pct:.2f}%)")
-    
-    print("\nHeqja e rreshtave ku mungojnë të dhëna kritike...")
-    before = len(df_clean)
-    
-    critical_cols = ['university_name', 'country', 'year', 'world_rank', 'teaching', 'research']
-    critical_cols = [col for col in critical_cols if col in df_clean.columns]
-    
-    df_clean = df_clean.dropna(subset=critical_cols)
-    removed = before - len(df_clean)
-    print(f"  Hequr {removed} rreshta me të dhëna kritike munguese")
-
-print("\n5. KONTROLLIMI I VLERAVE LOGJIKE (RENDITJE)")
-print("-" * 70)
-
-if 'world_rank' in df_clean.columns:
-    invalid_ranks = df_clean[df_clean['world_rank'] <= 0]
-    if len(invalid_ranks) > 0:
-        print(f"Renditje <= 0: {len(invalid_ranks)}")
-        df_clean = df_clean[df_clean['world_rank'] > 0]
-
-if 'cwur_world_rank' in df_clean.columns:
-    invalid_cwur = df_clean[df_clean['cwur_world_rank'] <= 0]
-    if len(invalid_cwur) > 0:
-        print(f"Renditje CWUR <= 0: {len(invalid_cwur)}")
-        df_clean = df_clean[df_clean['cwur_world_rank'] > 0]
-
-print("\n6. REZULTATI PËRFUNDIMTAR")
+print(f"Rreshta origjinalë në final_dataset: {len(df_full)}")
+print(f"Rreshta të hequr si outliers 'konsensus': {len(consensus_ids)} (sipas entity_id)")
+print(f"Rreshta të mbetur në 'final_dataset_no_outliers.csv': {len(df_clean)}")
+print("\n✓ Ruajtur 'final_dataset_no_outliers.csv' (pa outliers konsensus)")
+print("✓ Ruajtur 'final_dataset_with_outlier_flags.csv' (me kolonë is_outlier_consensus)")
 print("=" * 70)
-
-total_removed = len(df) - len(df_clean)
-removal_percentage = (total_removed / len(df)) * 100
-
-print(f"Dataset origjinal: {len(df)} rreshta")
-print(f"Dataset i pastër: {len(df_clean)} rreshta")
-print(f"Total i hequr: {total_removed} rreshta ({removal_percentage:.2f}%)")
-
-output_path = Path("university_data_final_cleaned.csv")
-df_clean.to_csv(output_path, index=False)
-print(f"\nDataset i pastër i ruajtur: {output_path}")
-
-print("\nStatistika përmbledhëse për kolonat kryesore:")
-summary_cols = ['world_rank', 'teaching', 'research', 'citations', 'num_students']
-summary_cols = [col for col in summary_cols if col in df_clean.columns]
-print(df_clean[summary_cols].describe().round(2))
-
-print("\n" + "=" * 70)
-print("Hapi 10 i kompletuar me sukses!")
-

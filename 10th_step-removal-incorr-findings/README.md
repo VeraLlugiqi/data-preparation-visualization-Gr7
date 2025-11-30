@@ -1,109 +1,103 @@
-# Hapi 10: Mënjanimi i Zbulimeve Jo të Sakta
+# Removal of Incorrect Findings (Outlier Consensus Filtering)
 
-## Përshkrim
+Ky hap përfaqëson fazën “Mënjanimi i zbulimeve jo të sakta”, ku kombinohen rezultatet e tre metodave të detektimit të përjashtuesve (Z-Score, IQR, Isolation Forest) për të identifikuar vetëm outliers e vërtetë.
 
-Ky hap kryen një pastrim final të datasetit duke hequr vlera të pasakta, të pamundura, dhe rreshta duplikatë. Ai siguron që të gjitha vlerat janë logjike, konsistente dhe të vlefshme për analizë.
+Qëllimi është të hiqen rreshtat që kanë devijime të forta dhe shfaqen si outliers në më shumë se një metodë, duke siguruar një dataset më të qëndrueshëm për analizat e mëtejshme.
 
-## Objektivat
+---
 
-1. **Heqja e vlerave negative ose zero** në kolona ku këto nuk janë të vlefshme
-2. **Kontrollimi i vlerave të pamundura** (p.sh., përqindje > 100%)
-3. **Heqja e duplikateve** për të shmangur bias në analizë
-4. **Pastrimi i vlerave munguese kritike**
-5. **Validimi logjik** i vlerave (p.sh., renditje pozitive)
+## 1. Përmbledhje
 
-## Input
+Ky hap kryen:
 
-- **Skedar:** `../8th-step-discret_binar_transform/university_data_discretized_transformed.csv`
-- **Rreshta:** ~2,895
-- **Kolona:** 39
+- Leximin e outliers nga:
+  - `outliers_zscore.csv`
+  - `outliers_iqr.csv`
+  - `outliers_isolation_forest.csv`
+  - datasetin origjinal `final_dataset.csv`
+- Ndërtimin e një identifikuesi unik për çdo rresht (university_name | country | year)
+- Kombinimin e rezultateve të tre metodave
+- Klasifikimin e outliers në:
+  - outliers të vërtetë (shfaqen në ≥ 2 metoda)
+  - outliers të pasaktë (shfaqen vetëm në 1 metodë)
+- Heqjen e outliers të vërtetë nga dataset-i origjinal
+- Gjenerimin e dataset-it final pa outliers
 
-## Procesi i Detajuar
+---
 
-### 1. Kontrollimi i Vlerave Negative ose Zero
+## 2. Input Files
 
-Kolonat e mëposhtme nuk mund të kenë vlera negative ose zero:
-- `international` - Rezultati duhet të jetë pozitiv
-- `research` - Rezultati duhet të jetë pozitiv
-- `citations` - Rezultati duhet të jetë pozitiv
-- `num_students` - Numri i studentëve duhet të jetë > 0
-- `student_staff_ratio` - Raporti duhet të jetë pozitiv
+Ky hap përdor këto fajlla:
 
-**Aksion:** Hiqen të gjithë rreshtat ku këto kolona kanë vlera <= 0
+- `outliers_zscore.csv`
+- `outliers_iqr.csv`
+- `outliers_isolation_forest.csv`
+- `final_dataset.csv` (dataset origjinal)
 
-### 2. Kontrollimi i Vlerave të Pamundura për International Students
+---
 
-`international_students` paraqet përqindjen e studentëve ndërkombëtarë dhe duhet të jetë në rangun [0, 1] (ose [0, 100] nëse është në përqindje).
+## 3. Output Files
 
-**Aksion:** Hiqen rreshtat ku `international_students > 1` (nëse është në formatin 0-1)
+### 3.1 outliers_all_methods_comparison.csv  
+Përmban kombinimin e tre metodave për çdo universitet/vend/vit, si dhe numrin e metodave që e kanë etiketuar si outlier (`methods_flagged`).
 
-### 3. Heqja e Rreshtave Duplikatë
+### 3.2 outliers_consensus.csv  
+Përfshin outliers të vërtetë, pra ato raste që janë detektuar nga dy ose tre metoda (`methods_flagged ≥ 2`).  
+Këta rreshta hiqen nga dataset-i final.
 
-Duplikatët mund të shkaktojnë:
-- Bias në analiza statistikore
-- Përmirësim të rreme të saktësisë së modeleve
-- Interpretim të gabuar të rezultateve
+### 3.3 outliers_false_detected.csv  
+Përfshin rastet që janë detektuar si outlier vetëm nga një metodë.  
+Këta konsiderohen zbulime të pasakta dhe nuk hiqen nga dataset-i.
 
-**Aksion:** Hiqen të gjithë rreshtat e përsëritur plotësisht
+### 3.4 final_dataset_with_outlier_flags.csv  
+Dataset-i origjinal i zgjeruar me një kolonë shtesë:
 
-### 4. Kontrollimi i Vlerave NULL (Mungesë)
 
-Për kolonat kritike, vlerat munguese nuk janë të pranueshme:
-- `university_name` - Emri duhet të ekzistojë
-- `country` - Shteti duhet të ekzistojë
-- `year` - Viti duhet të ekzistojë
-- `world_rank` - Renditja duhet të ekzistojë
-- `teaching`, `research` - Rezultatet kryesore duhet të ekzistojnë
+Përdoret për verifikim dhe auditim.
 
-**Aksion:** Hiqen rreshtat ku mungojnë këto të dhëna kritike
+### 3.5 final_dataset_no_outliers.csv  
+Dataset-i final i pastër pa outliers të vërtetë.  
+Ky file përdoret për analizat e mëtejshme të projektit.
 
-### 5. Kontrollimi i Vlerave Logjike
+---
 
-- Renditjet (`world_rank`, `cwur_world_rank`) duhet të jenë pozitive (> 0)
-- Vlerat duhet të jenë konsistente me kuptimin e tyre
+## 4. Logjika e Heqjes së Outliers
 
-**Aksion:** Hiqen rreshtat me renditje <= 0
+- Një rresht konsiderohet outlier i vërtetë nëse është shënuar si outlier në 2 ose 3 metoda.
+- Një rresht që del si outlier vetëm në 1 metodë klasifikohet si "false detection".
+- Vetëm outliers e vërtetë hiqen nga dataset-i.
+- Metoda garanton stabilitet statistikor duke shmangur heqjen e rasteve që janë devijime të vogla.
 
-## Output
+---
 
-**Skedar:** `university_data_final_cleaned.csv`
+## 5. Shembuj të Outliers Konsensus
 
-**Dimensionet:**
-- **Rreshta:** ~2,800-2,850 (varësisht nga sa vlera jo të sakta gjenden)
-- **Kolona:** 39 (të njëjta si input)
-- **Reduktimi:** Zakonisht < 5% e rreshtave hiqen
+Disa universitete të detektuara si outliers të vërtetë në këtë hap:
 
-**Karakteristikat:**
-- ✅ Pa vlera negative ose zero në kolonat e specifikuara
-- ✅ Pa vlera të pamundura (> 1 për përqindje)
-- ✅ Pa duplikatë
-- ✅ Pa vlera munguese kritike
-- ✅ Renditje pozitive dhe logjike
+- Alexandria University  
+- Australian National University  
+- Aberystwyth University  
+- Arizona State University  
+- Bielefeld University  
+- Aston University  
 
-## Përdorimi
+Këto institucione shfaqin devijime të forta në një ose më shumë nga dimensionet:
 
-```bash
-cd 10th_step-removal-incorr-findings
-python removal_incorrect_findings.py
-```
+- numër studentësh jashtëzakonisht i lartë ose i ulët
+- vlera të pazakonta të research dhe citations
+- student-staff ratio jashtë intervalit normal
+- variacione të mëdha nga viti në vit
 
-## Kërkesat
+---
 
-- pandas
-- numpy
-- pathlib
+## 6. Rezultati Final
 
-## Shënime të Rëndësishme
+| File | Përmbajtja | Qëllimi |
+|------|-------------|---------|
+| outliers_consensus.csv | Outliers të vërtetë | Për t'u hequr |
+| final_dataset_no_outliers.csv | Dataset final pa outliers | Përdoret për analizat e tjera |
+| outliers_false_detected.csv | Outliers të pasaktë | Vetëm raportim |
 
-1. **Heqja e të Dhënave:** Ky skedar heq rreshta që nuk janë të vlefshëm, kështu që dataset final mund të jetë pak më i vogël
-2. **Kolonat Kritike:** Lista e kolonave kritike mund të modifikohet sipas nevojës
-3. **Kontrollimi Logjik:** Duhet të siguroheni që vlerat janë në formatin e pritur (p.sh., përqindje në [0,1] apo [0,100])
+Dataset-i final është më i balancuar, pa ekstremitete dhe gati për fazat e tjera të analizës statistikore dhe modelimit.
 
-## Rezultati
-
-Dataset final i pastër dhe i validuar, i gatshëm për:
-- Analiza statistikore të besueshme
-- Vizualizime pa artefakte
-- Modele Machine Learning më të sakta
-- Raporte dhe prezantime profesionale
-
+---
