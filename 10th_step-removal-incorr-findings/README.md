@@ -101,3 +101,7 @@ Këto institucione shfaqin devijime të forta në një ose më shumë nga dimens
 Dataset-i final është më i balancuar, pa ekstremitete dhe gati për fazat e tjera të analizës statistikore dhe modelimit.
 
 ---
+
+
+
+

@@ -1,12 +1,12 @@
 # Përgatitja dhe Vizualizimi i të Dhënave - Projekt Gr7
 
-Ky projekt përmban përgatitjen dhe pastrimin e të dhënave të renditjes së universiteteve nga dy burime: Times Higher Education (THE) dhe Center for World University Rankings (CWUR). Projekti është organizuar në 8 hapa kryesorë, secili me procesin e vet të transformimit të të dhënave.
+Ky projekt përmban përgatitjen, pastrimin dhe analizën eksploruese të të dhënave të renditjes së universiteteve nga dy burime: Times Higher Education (THE) dhe Center for World University Rankings (CWUR). Projekti është organizuar në 11 hapa kryesorë, secili me procesin e vet të transformimit dhe analizës së të dhënave.
 
 ---
 
 ## Përmbledhje e Procesit
 
-Procesi fillon me bashkimin e dy datasetave (THE dhe CWUR), pastaj bëhet pastrimi i të dhënave, konvertimi i tipave, filtrim i viteve, imputim i vlerave munguese, kampionim, agregim dhe krijim i karakteristikave të reja deri në transformim dhe diskretizim final.
+Procesi fillon me bashkimin e dy datasetave (THE dhe CWUR), pastaj bëhet pastrimi i të dhënave, konvertimi i tipave, filtrimi i viteve, imputimi i vlerave munguese, kampionimi, agregimi dhe krijimi i karakteristikave të reja deri te transformimi, diskretizimi, detektimi dhe filtrimi i përjashtuesve, dhe në fund analiza eksploruese statistikore e datasetit final.
 
 ---
 
