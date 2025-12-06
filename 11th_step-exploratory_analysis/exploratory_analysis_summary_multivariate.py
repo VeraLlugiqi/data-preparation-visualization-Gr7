@@ -7,9 +7,6 @@ import seaborn as sns
 
 
 def load_data(csv_path: str) -> pd.DataFrame:
-    """
-    Lexon datasetin final pa outliers dhe bën disa kontrolle bazë.
-    """
     if not os.path.exists(csv_path):
         raise FileNotFoundError(f"CSV file not found: {csv_path}")
 
@@ -22,9 +19,6 @@ def load_data(csv_path: str) -> pd.DataFrame:
 
 
 def compute_univariate_summary(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Statistika përmbledhëse për të gjitha kolonat numerike.
-    """
     numeric_cols = df.select_dtypes(include=[np.number]).columns
 
     summary = df[numeric_cols].describe().T
@@ -32,9 +26,6 @@ def compute_univariate_summary(df: pd.DataFrame, output_dir: str) -> None:
 
 
 def compute_country_summary(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Statistika të përmbledhura sipas shtetit (mesatare për metrikat kryesore).
-    """
     required_cols = [
         "country",
         "teaching",
@@ -46,7 +37,6 @@ def compute_country_summary(df: pd.DataFrame, output_dir: str) -> None:
     ]
     missing = [c for c in required_cols if c not in df.columns]
     if missing:
-        # Nëse disa kolona mungojnë, përdor vetëm ato që ekzistojnë
         present = [c for c in required_cols if c in df.columns]
     else:
         present = required_cols
@@ -64,9 +54,6 @@ def compute_country_summary(df: pd.DataFrame, output_dir: str) -> None:
 
 
 def plot_distributions(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Histogramë dhe boxplot për metrikat kryesore.
-    """
     os.makedirs(output_dir, exist_ok=True)
 
     key_cols = [
@@ -99,9 +86,6 @@ def plot_distributions(df: pd.DataFrame, output_dir: str) -> None:
 
 
 def plot_correlation_heatmap(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Heatmap korrelacionesh për një grup variablesh numerike (analizë multivariante).
-    """
     candidate_cols = [
         "teaching",
         "research",
@@ -139,9 +123,6 @@ def plot_correlation_heatmap(df: pd.DataFrame, output_dir: str) -> None:
 
 
 def plot_pairwise_relationships(df: pd.DataFrame, output_dir: str) -> None:
-    """
-    Pairplot për disa metrika kryesore (analizë multivariante grafike).
-    """
     pair_cols = [
         "teaching",
         "research",
@@ -168,7 +149,7 @@ def plot_pairwise_relationships(df: pd.DataFrame, output_dir: str) -> None:
 def main() -> None:
     base_dir = os.path.dirname(os.path.abspath(__file__))
     data_path = os.path.join(base_dir, "..", "10th_step-removal-incorr-findings", "final_dataset_no_outliers.csv")
-    output_dir = base_dir  # ruajmë output në të njëjtin folder (step 11)
+    output_dir = base_dir
 
     print("Ngarkimi i datasetit final pa outliers...")
     df = load_data(data_path)
@@ -194,5 +175,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
 
 

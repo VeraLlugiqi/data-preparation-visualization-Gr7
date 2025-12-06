@@ -45,14 +45,14 @@ Outlier nëse: value < Lower Bound OSE value > Upper Bound
 - `outliers_iqr_top_universities.png` - Top 10 universitete me më shumë outlier features
 
 **Avantazhet:**
-- ✅ E thjeshtë dhe e kuptueshme
-- ✅ Nuk varet nga supozimi i normalitetit
-- ✅ Rezistent ndaj outliers ekstreme
-- ✅ E mirë për distributime të pjerrëta (skewed)
+- E thjeshtë dhe e kuptueshme
+- Nuk varet nga supozimi i normalitetit
+- Rezistent ndaj outliers ekstreme
+- E mirë për distributime të pjerrëta (skewed)
 
 **Disavantazhet:**
-- ❌ Analizon vetëm një kolonë në një kohë (univariate)
-- ❌ Mund të identifikojë shumë false positives në distributime jo-normale
+- Analizon vetëm një kolonë në një kohë (univariate)
+- Mund të identifikojë shumë false positives në distributime jo-normale
 
 ---
 
@@ -86,14 +86,14 @@ Outlier nëse: |Z| > 3
 - `outliers_zscore_heatmap.png` - Heatmap e Z-scores për top universities dhe features
 
 **Avantazhet:**
-- ✅ E lehtë për tu interpretuar (në njësi devijimesh standarde)
-- ✅ Matje probabilistike (bazohet në distribucion normal)
-- ✅ Threshold i qartë dhe i mirëkuptuar
+- E lehtë për tu interpretuar (në njësi devijimesh standarde)
+- Matje probabilistike (bazohet në distribucion normal)
+- Threshold i qartë dhe i mirëkuptuar
 
 **Disavantazhet:**
-- ❌ Supozon distribucion normal
-- ❌ Ndjeshëm ndaj outliers ekstreme (mean dhe std ndikohen)
-- ❌ Univariate (një kolonë në një kohë)
+- Supozon distribucion normal
+- Ndjeshëm ndaj outliers ekstreme (mean dhe std ndikohen)
+- Univariate (një kolonë në një kohë)
 
 ---
 
@@ -139,16 +139,16 @@ features = [
 - `outliers_isolation_forest_by_country.png` - Outliers sipas shtetit
 
 **Avantazhet:**
-- ✅ Multivariate - kapton marrëdhënie komplekse midis features
-- ✅ Nuk supozon distribucion specifik
-- ✅ Efektiv për high-dimensional data
-- ✅ Rezistent ndaj noise
-- ✅ Më pak false positives për outliers "lokale"
+- Multivariate - kapton marrëdhënie komplekse midis features
+- Nuk supozon distribucion specifik
+- Efektiv për high-dimensional data
+- Rezistent ndaj noise
+- Më pak false positives për outliers "lokale"
 
 **Disavantazhet:**
-- ❌ Më pak i interpretuar se metodat tradicionale
-- ❌ Kërkon tuning të parametrave (contamination)
-- ❌ Computationally më intensiv
+- Më pak i interpretuar se metodat tradicionale
+- Kërkon tuning të parametrave (contamination)
+- Computationally më intensiv
 
 ---
 
@@ -162,8 +162,8 @@ features = [
 | **Sensitivitet** | I ulët | I lartë | I mesëm |
 | **False Positives** | Të larta | Të mesme | Të ulëta |
 | **Computational Cost** | I ulët | I ulët | I lartë |
-| **Outliers Ekstreme** | ✅ I mirë | ❌ Problematik | ✅ I mirë |
-| **Outliers Multivariate** | ❌ S'kapton | ❌ S'kapton | ✅ Kapton |
+| **Outliers Ekstreme** | I mirë | Problematik | I mirë |
+| **Outliers Multivariate** | S'kapton | S'kapton | Kapton |
 
 ---
 

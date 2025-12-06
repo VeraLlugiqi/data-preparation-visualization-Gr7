@@ -105,3 +105,5 @@ Dataset-i final është më i balancuar, pa ekstremitete dhe gati për fazat e t
 
 
 
+
+

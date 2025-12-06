@@ -9,8 +9,6 @@ Qëllimi është të:
 - **Analizohen marrëdhëniet multivariante** midis metrikeve kryesore (teaching, research, citations, cwur_score, metrikat relative dhe të efikasitetit).
 - **Vizualizohen shpërndarjet** (histograme, boxplot-e) dhe **korrelacionet** (heatmap, pairplot).
 
-- **“Eksplorimi i të dhënave: statistika përmbledhëse, multivariante.”**
-
 Pas detektimit të përjashtuesve (Hapi 9) dhe mënjanimit të zbulimeve jo të sakta (Hapi 10), këtu bëhet **analiza e thelluar e të dhënave të pastruara**.
 
 ---
@@ -19,9 +17,9 @@ Pas detektimit të përjashtuesve (Hapi 9) dhe mënjanimit të zbulimeve jo të 
 
 - **Skedar:** `../10th_step-removal-incorr-findings/final_dataset_no_outliers.csv`
 - **Përmbajtja:** Dataseti final i universiteteve pas heqjes së outliers konsensus.
-- **Përmasa tipike:**
-  - Rreshta: ≈ 2,500–2,800 
-  - Kolona: 30+ (përfshin metrikat bazë + metrika të derizuara/relative/z-scores)
+- **Përmasa:**
+  - Rreshta: 2,358
+  - Kolona: 39 (përfshin metrikat bazë + metrika të derizuara/relative/z-scores)
 
 ---
 
@@ -139,5 +137,7 @@ python exploratory_analysis_summary_multivariate.py
   - Jep një **pamje statistike të qartë** të datasetit final që do të përdoret për interpretim dhe vizualizim në raportin përfundimtar.
 
 Me këtë hap, pipeline-i i përgatitjes së të dhënave përfshin jo vetëm pastrimin dhe transformimin, por edhe **analizën eksploruese statistikore** të rezultatit final.
+
+
 
 

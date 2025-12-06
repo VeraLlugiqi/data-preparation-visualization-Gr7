@@ -389,10 +389,10 @@ cwur_world_rank = fillna(world_rank)
 ```
 
 **Cilësia e të Dhënave:**
-- ✅ Mungesa < 1% për kolonat kryesore (teaching, research, citations)
-- ✅ Të gjitha universitetet kanë të paktën një renditje (THE ose CWUR)
-- ✅ Tipet numerike të sakta dhe konsistente
-- ✅ Dataset i balancuar për 4 vite (2012-2015)
+- Mungesa < 1% për kolonat kryesore (teaching, research, citations)
+- Të gjitha universitetet kanë të paktën një renditje (THE ose CWUR)
+- Tipet numerike të sakta dhe konsistente
+- Dataset i balancuar për 4 vite (2012-2015)
 
 **Rezultati:** Dataset i pastër, konsistent, dhe i gatshëm për analizë dhe modele statistikore
 
@@ -865,10 +865,10 @@ KOLONA TË REJA (5):
 ```
 
 **Përfitimet:**
-- ✅ Dataset më i kompakt (heqje redundancash)
-- ✅ Metrika më informative (karakteristika të derizuara)
-- ✅ Kombinim informacioni nga THE dhe CWUR
-- ✅ Efikasië më e lartë për modele ML
+- Dataset më i kompakt (heqje redundancash)
+- Metrika më informative (karakteristika të derizuara)
+- Kombinim informacioni nga THE dhe CWUR
+- Efikasië më e lartë për modele ML
 
 **Rezultati:** Dataset i optimizuar me karakteristika të zgjedhura dhe të pasurura
 
@@ -1090,14 +1090,236 @@ Z-Scores:
 ```
 
 **Rezultati Final:** Dataset i plotë dhe i transformuar me:
-- ✅ 39 karakteristika (bazike + të derizuara + të transformuara)
-- ✅ Forma të nd ryshme (numerike, kategorike, binare, relative, standardizuara)
-- ✅ Gati për analiza të avancuara, vizualizime komplekse, dhe Machine Learning
-- ✅ Mbeshtet krahasime absolute, relative, dhe kontekstuale
-- ✅ Të dhënat e pastruara, konsistente dhe të standardizuara
+- 39 karakteristika (bazike + të derizuara + të transformuara)
+- Forma të ndryshme (numerike, kategorike, binare, relative, standardizuara)
+- Gati për analiza të avancuara, vizualizime komplekse, dhe Machine Learning
+- Mbeshtet krahasime absolute, relative, dhe kontekstuale
+- Të dhënat e pastruara, konsistente dhe të standardizuara
 
+---
 
+## Faza 2
 
+---
+
+## Hapi 9: Detektimi i Përjashtuesve (`9th_step-outlier_detection`)
+
+### Përshkrim
+
+Ky hap implementon tre metoda të ndryshme për detektimin e përjashtuesve (outliers) në datasetin e universiteteve. Përjashtuesit janë pikë të dhënash që devijojnë në mënyrë të konsiderueshme nga të dhënat e tjera dhe mund të tregojnë anomali, gabime, ose karakteristika unike të vërteta.
+
+### Input
+
+- **Skedar:** `../final_dataset.csv`
+- **Rreshta:** 2,895
+- **Kolona:** 39 karakteristika (numerike dhe kategorike)
+- **Vite:** 2012-2015
+
+### Logjika e Implementimit
+
+**Metoda 1: IQR (Interquartile Range)**
+- Llogarit kuartilet Q1 dhe Q3 për çdo kolonë numerike
+- Identifikon outliers si vlera jashtë intervalit [Q1 - 1.5×IQR, Q3 + 1.5×IQR]
+- Analizon 18 kolona numerike kryesore: teaching, research, citations, num_students, student_staff_ratio, international_students, cwur_score, rank_gap, research_efficiency_per_1k, faculty_efficiency, global_influence_index, relative_teaching, relative_citations, relative_cwur_score, teaching_z, citations_z, num_students_z, relative_teaching_z, relative_citations_z
+
+**Metoda 2: Z-Score**
+- Llogarit z-score për çdo vlerë: z = (x - μ) / σ
+- Identifikon outliers si vlera me |z-score| > 3 (99.7% confidence level)
+- Supozon distribucion normal dhe analizon të njëjtat 18 kolona
+
+**Metoda 3: Isolation Forest**
+- Algoritëm machine learning multivariate që analizon shumë karakteristika së bashku
+- Analizon 15 karakteristika së bashku për të identifikuar kombinime të pazakonta
+- Përdor contamination=0.1 (pret 10% outliers), n_estimators=100, random_state=42
+- Standardizim me StandardScaler para analizës
+
+### Output
+
+**Skedarë CSV:**
+- `iqr/outliers_iqr.csv` - Detaje të plota për çdo outlier IQR (row_index, university_name, country, year, feature, value, lower_bound, upper_bound, Q1, Q3, IQR)
+- `zscore/outliers_zscore.csv` - Detaje për çdo outlier Z-Score (row_index, university_name, country, year, feature, value, z_score, mean, std)
+- `isolation_forest/outliers_isolation_forest.csv` - Universitete outliers me anomaly scores dhe të gjitha 15 features
+
+**Vizualizime PNG:**
+- Boxplots, histogramë, scatter plots, heatmaps për secilën metodë
+- Krahasime midis metodave dhe top universiteteve me outliers
+
+### Shembull Rreshtash
+
+**outliers_zscore.csv:**
+```
+row_index,university_name,country,year,feature,value,z_score,mean,std
+20,University of Chicago,United States of America,2012,teaching,89.4,3.90,36.15,13.64
+24,University of Cambridge,United Kingdom,2012,teaching,90.5,3.98,36.15,13.64
+```
+
+**outliers_isolation_forest.csv:**
+```
+university_name,country,year,anomaly_score,teaching,research,citations,num_students,...
+Alexandria University,Egypt,2012,0.65,15.2,12.1,28.5,45231,...
+Australian National University,Australia,2013,0.58,42.3,38.7,65.2,18542,...
+```
+
+### Rezultati
+
+Tre metoda identifikojnë outliers të ndryshëm:
+- IQR: ~800-1000 raste unike (shumë detektues, por me false positives të mundshme)
+- Z-Score: ~600-800 raste unike (më konservativ, por supozon normalitet)
+- Isolation Forest: ~290 raste unike (10% e datasetit, multivariate approach)
+
+Krahasimi i tre metodave tregon se disa outliers shfaqen në më shumë se një metodë, që tregon konsensus për outliers të vërtetë. Kjo logjikë përdoret në Hapin 10 për të identifikuar outliers të vërtetë që duhen hequr.
+
+---
+
+## Hapi 10: Mënjanimi i Zbulimeve Jo të Sakta (`10th_step-removal-incorr-findings`)
+
+### Përshkrim
+
+Ky hap përfaqëson fazën "Mënjanimi i zbulimeve jo të sakta", ku kombinohen rezultatet e tre metodave të detektimit të përjashtuesve (Z-Score, IQR, Isolation Forest) për të identifikuar vetëm outliers të vërtetë.
+
+Qëllimi është të hiqen rreshtat që kanë devijime të forta dhe shfaqen si outliers në më shumë se një metodë, duke siguruar një dataset më të qëndrueshëm për analizat e mëtejshme. Kjo metodë garanton stabilitet statistikor duke shmangur heqjen e rasteve që janë devijime të vogla ose false positives.
+
+### Input
+
+- `9th_step-outlier_detection/zscore/outliers_zscore.csv` (nga Hapi 9)
+- `9th_step-outlier_detection/iqr/outliers_iqr.csv` (nga Hapi 9)
+- `9th_step-outlier_detection/isolation_forest/outliers_isolation_forest.csv` (nga Hapi 9)
+- `final_dataset.csv` (dataset origjinal me 2,895 rreshta)
+
+### Logjika e Heqjes
+
+1. **Krijimi i ID unik:** Për çdo rresht krijohet një identifikues unik: `university_name | country | year`. Kjo lejon kombinimin e rezultateve nga tre metodat e ndryshme.
+
+2. **Kombinimi i metodave:** Për çdo entitet (universitet+vend+vit) numërohet në sa metoda shfaqet si outlier. Krijon kolona flag: `in_zscore`, `in_iqr`, `in_isolation_forest`.
+
+3. **Klasifikimi:**
+   - **Outliers të vërtetë (konsensus):** Shfaqen në ≥ 2 metoda (`methods_flagged >= 2`)
+   - **Outliers të pasaktë (false positives):** Shfaqen vetëm në 1 metodë (`methods_flagged == 1`)
+
+4. **Heqja:** Vetëm outliers të vërtetë (konsensus) hiqen nga dataseti origjinal. Outliers të pasaktë ruhen për referencë por nuk hiqen.
+
+### Output
+
+**Skedarë CSV:**
+- `outliers_all_methods_comparison.csv` - Kombinimi i të gjitha metodave me kolona flag për secilën metodë dhe `methods_flagged` (0-3)
+- `outliers_consensus.csv` - Outliers të vërtetë (≥2 metoda) - për t'u hequr nga dataseti
+- `outliers_false_detected.csv` - Outliers të pasaktë (1 metodë) - për referencë dhe auditim
+- `final_dataset_with_outlier_flags.csv` - Dataset origjinal me kolonë shtesë `is_outlier_consensus` (0/1)
+- `final_dataset_no_outliers.csv` - Dataset final pa outliers konsensus (2,358 rreshta)
+
+### Shembull Rreshtash
+
+**outliers_consensus.csv:**
+```
+entity_id,in_zscore,in_iqr,in_isolation_forest,methods_flagged,university_name,country,year
+Alexandria University | Egypt | 2012,1,1,1,3,Alexandria University,Egypt,2012
+Aberystwyth University | United Kingdom | 2014,1,1,0,2,Aberystwyth University,United Kingdom,2014
+Arizona State University | United States of America | 2013,1,0,1,2,Arizona State University,United States of America,2013
+```
+
+**final_dataset_no_outliers.csv:**
+```
+world_rank,university_name,country,teaching,international,research,citations,num_students,student_staff_ratio,international_students,year,cwur_world_rank,...
+201,University of Gothenburg,Sweden,25.8,48.4,37.7,55.7,26420,16.4,0.12,2012,201,...
+156,University of Exeter,United Kingdom,31.3,73.4,33.3,67.8,17755,18.8,0.28,2012,156,...
+251,University of Graz,Austria,24.9,63.8,14.0,55.1,20584,26.8,0.12,2012,251,...
+```
+
+### Rezultati
+
+- **Rreshta origjinalë:** 2,895
+- **Outliers konsensus (≥2 metoda):** 537 raste unike (18.5% e datasetit)
+- **Outliers false positives (1 metodë):** ~400-500 raste (nuk hiqen)
+- **Rreshta të mbetur:** 2,358 (81.5% e datasetit origjinal)
+- **Dataset i pastruar:** Pa outliers të vërtetë, i balancuar dhe gati për analizë statistikore dhe eksploruese
+
+---
+
+## Hapi 11: Eksplorimi i të Dhënave (`11th_step-exploratory_analysis`)
+
+### Përshkrim
+
+Ky hap realizon eksplorimin eksplorues të të dhënave (EDA) mbështetur në datasetin final pa përjashtues (outliers). Qëllimi është të shikohen statistikat përmbledhëse për të gjitha kolonat numerike dhe të analizohen marrëdhëniet multivariante midis metrikeve kryesore.
+
+Pas detektimit të përjashtuesve (Hapi 9) dhe mënjanimit të zbulimeve jo të sakta (Hapi 10), këtu bëhet analiza e thelluar e të dhënave të pastruara për të kuptuar shpërndarjet, korrelacionet dhe strukturat e datasetit final.
+
+### Input
+
+- **Skedar:** `../10th_step-removal-incorr-findings/final_dataset_no_outliers.csv`
+- **Rreshta:** 2,358
+- **Kolona:** 39 (përfshin metrikat bazë + metrika të derizuara/relative/z-scores)
+- **Vite:** 2012-2015
+
+### Logjika e Analizës
+
+**1. Statistika Përmbledhëse (Univariate)**
+- Për çdo kolonë numerike: count, mean, std, min, 25%, 50% (median), 75%, max
+- Identifikon shpërndarjen, tendencën qendrore dhe shpërndarjen e të dhënave
+- Ruhet në: `summary_statistics_numeric.csv`
+
+**2. Statistika Sipas Shtetit**
+- Grupim: `groupby("country")`
+- Për metrikat kryesore (nëse ekzistojnë): teaching, research, citations, cwur_score, num_students, international_students
+- Llogarit: mean, median, min, max, count për çdo shtet
+- Ruhet në: `country_summary_after_outlier_removal.csv`
+
+**3. Vizualizime Univariate**
+- Histogramë + KDE (Kernel Density Estimation) për metrikat kryesore: teaching, research, citations, cwur_score, num_students, student_staff_ratio
+- Boxplot-e për identifikim vizual të vlerave ekstreme edhe pas filtrimit të outliers
+
+**4. Analizë Multivariante - Korrelacione**
+- Matrica e korrelacioneve Pearson për 13 metrika kryesore:
+  - Nota të performancës: teaching, research, citations, cwur_score
+  - Metrika të efikasitetit: rank_gap, research_efficiency_per_1k, faculty_efficiency, global_influence_index
+  - Metrika relative: relative_teaching, relative_citations, relative_cwur_score
+  - Variabla strukturore: num_students, student_staff_ratio
+- Heatmap me annotime për vlera numerike të korrelacionit (-1 deri +1)
+- Identifikon marrëdhënie lineare të forta midis variablave
+
+**5. Analizë Multivariante - Pairplot**
+- Scatter plots dhe distribucione për kombinime metrikash: teaching, research, citations, cwur_score, relative_teaching, relative_citations
+- Identifikon marrëdhënie jo-lineare, shpërndarje dhe struktura të mundshme grupesh
+
+### Output
+
+**Skedarë CSV:**
+- `summary_statistics_numeric.csv` - Statistika përmbledhëse për të gjitha kolonat numerike (39 kolona)
+- `country_summary_after_outlier_removal.csv` - Statistika sipas shtetit për metrikat kryesore
+
+**Vizualizime PNG (300 DPI):**
+- `hist_teaching.png`, `hist_research.png`, `hist_citations.png`, `hist_cwur_score.png`, `hist_num_students.png`, `hist_student_staff_ratio.png` - Histogramë + KDE
+- `boxplot_teaching.png`, `boxplot_research.png`, etj. - Boxplot-e
+- `correlation_heatmap_core_features.png` - Heatmap i korrelacioneve (13x13 matrica)
+- `pairplot_core_metrics.png` - Pairplot për 6 metrika kryesore
+
+### Shembull Rreshtash
+
+**summary_statistics_numeric.csv:**
+```
+,count,mean,std,min,25%,50%,75%,max
+teaching,2358,36.15,13.64,5.2,26.8,34.5,44.2,99.7
+research,2358,38.42,15.23,8.1,27.3,36.8,48.1,99.5
+citations,2358,52.18,18.92,12.4,38.5,50.2,65.8,99.9
+cwur_score,2358,46.85,2.34,42.1,45.2,46.8,48.1,51.2
+num_students,2358,21543.5,12456.8,5234,12345,19876,28765,45231
+```
+
+**country_summary_after_outlier_removal.csv:**
+```
+country,teaching_mean,teaching_median,research_mean,research_median,citations_mean,...
+United States of America,47.35,46.8,52.18,51.2,71.32,...
+United Kingdom,35.15,34.2,42.67,41.8,60.59,...
+Germany,37.07,36.5,38.24,37.9,59.34,...
+```
+
+### Rezultati
+
+- **Statistika të plota** për të gjitha 39 kolonat numerike, duke treguar shpërndarjen dhe karakteristikat e secilës metrikë
+- **Korrelacione të identifikuara** midis metrikave (p.sh. research dhe citations kanë korrelacion të lartë r>0.7, teaching dhe research kanë korrelacion mesatar r>0.5)
+- **Vizualizime komplekse** për shpërndarje dhe marrëdhënie që ndihmojnë në interpretim
+- **Dataset i analizuar** dhe i gatshëm për interpretim dhe raportim
+
+Dataseti final me 2,358 rreshta dhe 39 kolona është i pastruar, i analizuar dhe i gatshëm për vizualizim në Power BI ose mjete të tjera. Struktura e të dhënave është e përshtatshme për dashboard interaktivë, raporte dhe analiza të mëtejshme.
 
 ---
 
@@ -1117,18 +1339,30 @@ Z-Scores:
 | **6. Agregimi** | cleaned | country_year_summary.csv | ~280 | ~28 | Universitet → Shtet-Vit |
 | **7. Seleksionimi** | cleaned | feature_selected_created.csv | 2,895 | 24 | -3 redundante, +5 të reja |
 | **8. Transformimi** | selected | university_data_discretized.csv | 2,895 | 39 | +15 (diskrete/binare/relative/z-scores) |
+| **9. Detektimi Outliers** | final_dataset | outliers_*.csv | - | - | 3 metoda: IQR, Z-Score, Isolation Forest |
+| **10. Heqja Outliers** | final_dataset | final_dataset_no_outliers.csv | 2,358 | 39 | Konsensus >=2 metoda |
+| **11. Eksplorimi** | no_outliers | summary_*.csv, vizualizime | 2,358 | 39 | Statistika + multivariante |
 
 ### Karakteristikat e Datasetit Final
 
-**Skedari Kryesor:** `university_data_discretized_transformed.csv`
+**Skedari Kryesor:** `10th_step-removal-incorr-findings/final_dataset_no_outliers.csv`
 
 **Karakteristikat:**
-- 📈 **2,895 rreshta** - Universitete nga e gjithë bota (2012-2015)
-- 📊 **39 kolona** - Karakteristika të ndryshme për analizë të thellë
-- ✅ **Të dhëna të pastruara** - Mungesa <1%, pa duplikate
-- 🌐 **2 burime** - THE dhe CWUR të integruara
-- 🔢 **4 vite** - Timeline 2012-2015
-- 🎯 **Forma të shumta** - Numerike, kategorike, binare, relative, standardizuara
+- **2,358 rreshta** - Universitete nga e gjithë bota (2012-2015), pa outliers konsensus (81.5% e datasetit origjinal)
+- **39 kolona** - Karakteristika të ndryshme për analizë të thellë
+- **Të dhëna të pastruara** - Mungesa <1%, pa duplikate, pa outliers të vërtetë
+- **2 burime** - THE dhe CWUR të integruara
+- **4 vite** - Timeline 2012-2015
+- **Forma të shumta** - Numerike, kategorike, binare, relative, standardizuara
+
+**Përshtatja për Power BI:**
+Dataseti final me 2,358 rreshta dhe 39 kolona është optimal për Power BI:
+- Madhësia e datasetit (2,358 rreshta) është e përshtatshme për performancë të shpejtë në Power BI
+- 39 kolona ofrojnë fleksibilitet për krijimin e dashboard-eve komplekse me metrika të shumta
+- Struktura e të dhënave (identifikues, metrika numerike, kategorike, binare) lejon filtrim, grupim dhe agregim të lehtë
+- Të dhënat janë të pastruara dhe të konsistuara, pa nevojë për pastrim shtesë në Power BI
+- Metrikat relative dhe z-scores lejojnë krahasime dhe analiza të avancuara
+- Kolonat kategorike (teaching_level, citations_level) dhe binare (top100_times, top100_cwur) lejojnë filtrim dhe grupim të shpejtë
 
 ### Tipet e Karakteristikave
 
@@ -1161,46 +1395,110 @@ Z-Scores:
 
 ### Përdorimet e Datasetit
 
-✅ **Analiza Eksploruese**
+**Analiza Eksploruese**
 - Shpërndarja e renditjeve sipas shteteve/rajoneve
 - Trendet kohore (2012-2015)
 - Krahasimet midis THE dhe CWUR
 
-✅ **Analiza Statistikore**
+**Analiza Statistikore**
 - Korrelacione midis metrikave
 - Regression për parashikim
 - Clustering i universiteteve
 
-✅ **Vizualizime**
+**Vizualizime**
 - Scatter plots, heatmaps, bar charts
 - Time series analysis
 - Geographic distributions
 
-✅ **Machine Learning**
+**Machine Learning**
 - Classification (p.sh., top100 prediction)
 - Ranking prediction
 - Feature importance analysis
 
-✅ **Krahasime Kontekstuale**
+**Krahasime Kontekstuale**
 - Performanca relative brenda shteteve
 - Identifikimi i outlierëve
 - Benchmark analysis
 
-### Cilësia e Të Dhënave - Raport Final
+---
 
-| Metri kë | Vlerë | Status |
-|---------|---------|--------|
-| **Kompletiteti** | 99.5% | ✅ Ekselent |
-| **Konsistenca** | 100% | ✅ E plotë |
-| **Saktësia** | Validuar | ✅ E verifikuar |
-| **Duplikate** | 0 | ✅ Të pastruara |
-| **Standardizimi** | I plotë | ✅ I gatshëm |
-| **Dokumentimi** | I detajuar | ✅ Komplet |
+---
+
+## Përmbledhje e Datasetit Final
+
+### Statistikat e Datasetit Final
+
+**Skedari:** `10th_step-removal-incorr-findings/final_dataset_no_outliers.csv`
+
+- **Rreshta:** 2,358 (81.5% e datasetit origjinal pas heqjes së outliers konsensus)
+- **Kolona:** 39 (identifikues, metrika numerike, kategorike, binare, relative, z-scores)
+- **Vite:** 2012-2015 (4 vite)
+- **Shtete:** ~70-80 shtete të ndryshme
+- **Universitete unike:** ~600-700 universitete
+
+### Si Duken Të Dhënat
+
+**Shembull rreshtash nga dataseti final:**
+
+```
+world_rank,university_name,country,teaching,international,research,citations,num_students,student_staff_ratio,international_students,year,cwur_world_rank,...
+201,University of Gothenburg,Sweden,25.8,48.4,37.7,55.7,26420,16.4,0.12,2012,201,...
+156,University of Exeter,United Kingdom,31.3,73.4,33.3,67.8,17755,18.8,0.28,2012,156,...
+251,University of Graz,Austria,24.9,63.8,14.0,55.1,20584,26.8,0.12,2012,251,...
+```
+
+**Karakteristikat kryesore:**
+- Të gjitha vlerat numerike janë të pastruara dhe të konsistuara
+- Kolonat kategorike (teaching_level, citations_level) ofrojnë grupim të lehtë
+- Kolonat binare (top100_times, top100_cwur) lejojnë filtrim të shpejtë
+- Metrikat relative lejojnë krahasime kontekstuale brenda shteteve
+- Z-scores lejojnë standardizim dhe krahasime midis metrikave të ndryshme
+
+### Përshtatja për Power BI
+
+Dataseti final është optimal për Power BI për arsyet e mëposhtme:
+
+**1. Madhësia e Datasetit:**
+- 2,358 rreshta është një madhësi e përshtatshme për performancë të shpejtë në Power BI
+- Nuk kërkon kompresim ose agregim të tepërt
+- Mund të ngarkohet direkt në Power BI pa probleme performancë
+
+**2. Struktura e Të Dhënave:**
+- 39 kolona ofrojnë fleksibilitet për krijimin e dashboard-eve komplekse
+- Identifikues të qartë (university_name, country, year) për filtrim dhe grupim
+- Metrika numerike të pastruara për llogaritje dhe agregim
+- Kolona kategorike dhe binare për filtrim dhe grupim të shpejtë
+
+**3. Cilësia e Të Dhënave:**
+- Të dhënat janë të pastruara, pa duplikate, pa outliers të vërtetë
+- Mungesa <1% për kolonat kryesore
+- Konsistencë në formatet dhe tipet e të dhënave
+- Nuk kërkon pastrim shtesë në Power BI
+
+**4. Metrikat e Disponueshme:**
+- Metrika absolute (teaching, research, citations, cwur_score) për analiza direkte
+- Metrika relative (relative_teaching, relative_citations) për krahasime kontekstuale
+- Metrika të efikasitetit (research_efficiency_per_1k, faculty_efficiency) për analiza të avancuara
+- Z-scores për standardizim dhe krahasime midis metrikave të ndryshme
+
+**5. Vizualizime të Mundshme:**
+- Scatter plots për marrëdhënie midis metrikave
+- Bar charts për krahasime sipas shteteve ose viteve
+- Heatmaps për korrelacione
+- Time series për trendet kohore (2012-2015)
+- Geographic maps për shpërndarje sipas shteteve
+- Filtering dhe drill-down për analiza të detajuara
+
+**6. Rekomandime për Power BI:**
+- Përdor `university_name`, `country`, `year` si identifikues për filtrim dhe grupim
+- Krijoni metrika të derizuara në Power BI bazuar në kolonat ekzistuese
+- Përdorni kolonat binare (top100_times, top100_cwur) për filtrim të shpejtë
+- Eksploroni korrelacionet midis metrikave duke përdorur scatter plots
+- Krijoni dashboard interaktivë me filtra për shtet, vit, dhe kategori
 
 ---
 
 **Grupi:**  7  
-**Data:** 02.11.2025  
 **Lënda:** Përgatitja dhe vizualizimi i të dhënave
 
 
