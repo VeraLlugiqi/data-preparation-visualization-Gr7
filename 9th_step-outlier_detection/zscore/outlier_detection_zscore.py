@@ -36,7 +36,6 @@ for col in numeric_cols:
 
     outlier_mask = z_scores > 3
     outlier_indices = df[outlier_mask].index.tolist()
-
     outlier_counts[col] = len(outlier_indices)
 
     for idx in outlier_indices:
