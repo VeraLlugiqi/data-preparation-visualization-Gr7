@@ -1,53 +1,21 @@
 # Përgatitja dhe Vizualizimi i të Dhënave - Projekt Gr7
 
-Ky projekt përmban përgatitjen, pastrimin dhe analizën eksploruese të të dhënave të renditjes së universiteteve nga dy burime: Times Higher Education (THE) dhe Center for World University Rankings (CWUR). Projekti është organizuar në 11 hapa kryesorë, secili me procesin e vet të transformimit dhe analizës së të dhënave.
+Ky projekt përmban përgatitjen dhe pastrimin e të dhënave të renditjes së universiteteve nga dy burime: Times Higher Education (THE) dhe Center for World University Rankings (CWUR). Projekti është organizuar në 8 hapa kryesorë, secili me procesin e vet të transformimit të të dhënave.
 
 ---
 
 ## Përmbledhje e Procesit
 
-Procesi fillon me bashkimin e dy datasetave (THE dhe CWUR), pastaj bëhet pastrimi i të dhënave, konvertimi i tipave, filtrimi i viteve, imputimi i vlerave munguese, kampionimi, agregimi dhe krijimi i karakteristikave të reja deri te transformimi, diskretizimi, detektimi dhe filtrimi i përjashtuesve, dhe në fund analiza eksploruese statistikore e datasetit final.
+Procesi fillon me bashkimin e dy datasetave (THE dhe CWUR), pastaj bëhet pastrimi i të dhënave, konvertimi i tipave, filtrim i viteve, imputim i vlerave munguese, kampionim, agregim dhe krijim i karakteristikave të reja deri në transformim dhe diskretizim final.
 
 ---
 
 ## Hapi 1: Bashkimi i të Dhënave (`1st_step-merging`)
 
 ### Përshkrim
-Ky hap bashkon dy datasetat e renditjes së universiteteve: `timesData.csv` (Times Higher Education) dhe `cwurData.csv` (Center for World University Rankings) në një dataset të vetëm, duke përdorur outer join për të mbajtur të gjitha universitetet nga të dy burimet.
+Ky hap bashkon dy datasetat e renditjes së universiteteve: `timesData.csv` (Times Higher Education) dhe `cwurData.csv` (Center for World University Rankings) në një dataset të vetëm.
 
-### Input
-- **timesData.csv**: 2,603 rreshta (2011-2016), 14 kolona
-- **cwurData.csv**: 2,200 rreshta (2012-2015), 13 kolona
-
-### Procesi i Detajuar
-
-#### 1. Normalizimi i Emrave
-Për të përmirësuar përputhjen midis dy datasetave:
-- **Heqja e karaktereve të padukshme**: Zero-width spaces, unicode dashes speciale
-- **Fshirja e pjesëve në kllapa**: "University of Cambridge (UK)" → "university of cambridge"
-- **Heqja e ndarjeve rajonale**: "University, California" → "university"
-- **Unifikom variante**: 
-  - "Pierre and Marie Curie University" ≈ "Pierre Marie Curie"
-  - "Technion - Israel Institute of Technology" ≈ "Technion"
-  - "Wageningen University and Research Center" ≈ "Wageningen University"
-- **Lowercase dhe trim**: Të gjitha karakteret bëhen të vogla dhe hiqen hapësirat
-
-#### 2. Bashkimi (Outer Join)
-- **Kyçe bashkimi**: (`year`, `normalized_name`)
-- **Tipi**: Outer join - mban të gjitha rreshtat nga të dyja datasetat
-- **Plotësimi**: Nëse `university_name` ose `country` mungon nga THE, plotësohet nga CWUR
-
-#### 3. Riemërtimi i Kolonave CWUR
-Të gjitha kolonat nga CWUR marrin prefiksin `cwur_` për të shmangur konfliktet:
-- `world_rank` → `cwur_world_rank`
-- `citations` → `cwur_citations`
-- etj.
-
-#### 4. Pastrimi Final
-- Heqja e duplikateve bazuar në (`year`, `university_name`)
-- Vlerat munguese shënohen me "-"
-
-### Kolona të Krijuara (Total: 25 kolona)
+### Kolona të Krijuara
 
 **Kolonat origjinale nga Times Data (14 kolona):**
 - `world_rank` - Pozicioni në renditjen botërore (integer, më i ulët = më mirë)
@@ -78,90 +46,24 @@ Të gjitha kolonat nga CWUR marrin prefiksin `cwur_` për të shmangur konflikte
 - `cwur_patents` - Renditja për patentat (integer)
 - `cwur_score` - Rezultati total CWUR (numeric)
 
-### Output
+**Formula e Bashkimit:**
+Bashkimi bëhet duke përdorur outer join në:
+- `year` (përputhje e saktë)
+- `normalized_university_name` (emër i normalizuar për përputhje më të mirë)
 
-**Skedar:** `merged_university_data.csv`
-
-**Dimensionet:**
-- **Rreshta:** 3,895 (1 header + 3,894 rreshta të dhënash)
-- **Kolona:** 25
-- **Vite:** 2012-2015 (4 vite)
-- **Universitete unike:** ~900-1000 universitete
-
-**Struktura e Kolonave (25 total):**
-```
-1.  world_rank                    [THE - Pozicioni global]
-2.  university_name                [Emri i universitetit]
-3.  country                        [Shteti]
-4.  teaching                       [THE - Rezultati mësimdhënie 0-100]
-5.  international                  [THE - Perspektiva ndërkombëtare 0-100]
-6.  research                       [THE - Rezultati kërkime 0-100]
-7.  citations                      [THE - Rezultati citime 0-100]
-8.  income                         [THE - Të ardhura industriale 0-100]
-9.  total_score                    [THE - Rezultati total 0-100]
-10. num_students                   [Numri i studentëve]
-11. student_staff_ratio            [Raporti student-staf]
-12. international_students         [% studentë ndërkombëtarë]
-13. female_male_ratio              [Raporti femra:meshkuj]
-14. year                           [Viti i renditjes]
-15. cwur_world_rank                [CWUR - Pozicioni global]
-16. cwur_national_rank             [CWUR - Pozicioni kombëtar]
-17. cwur_quality_of_education      [CWUR - Renditja cilësia arsimit]
-18. cwur_alumni_employment         [CWUR - Renditja punësimi alumni]
-19. cwur_quality_of_faculty        [CWUR - Renditja cilësia fakulteti]
-20. cwur_publications              [CWUR - Renditja publikime]
-21. cwur_influence                 [CWUR - Renditja influenca]
-22. cwur_citations                 [CWUR - Renditja citime]
-23. cwur_broad_impact              [CWUR - Renditja ndikimi i gjerë]
-24. cwur_patents                   [CWUR - Renditja patenta]
-25. cwur_score                     [CWUR - Rezultati total]
-```
-
-**Karakteristikat:**
-- Përfshin universitete që janë **vetëm në THE**, **vetëm në CWUR**, ose në **të dyja**
-- Vlerat munguese (kur një universitet s'ekziston në njërën prej burimeve) shënohen me "-"
-- Dataset i plotë i pakonsoliduar, me të gjitha kolonat origjinale
-
-**Shembull Rreshti:**
-```
-world_rank: 1
-university_name: Harvard University  
-country: USA
-teaching: 99.7 | research: 99.5 | citations: 99.9
-cwur_world_rank: 1 | cwur_score: 100.00
-```
 
 ---
 
 ## Hapi 2: Konvertimi i Tipave (`2nd_step-changing_types`)
 
 ### Përshkrim
-Ky hap transformon të dhënat e papastërt nga formati string në formate numerike të përshtatshme për analizë. Shumë kolona në datasetat origjinale janë string (p.sh. "1,234", "100-200", "14%") dhe duhet të konvertohen.
+Ky hap pastron dhe konverton kolonat e datasetit të bashkuar në formatet e duhura numerike për analizë.
 
-### Input
-- **Skedar:** `merged_university_data.csv` (3,895 rreshta)
-- **Problem:** Vlera të tilla si "401-500", "5,000", "23%", "42:58" nuk janë numerike
-
-### Procesi i Detajuar
-
-#### 1. Heqja e Formatimeve
-- **Presjet**: "1,234" → 1234
-- **Diapazonet**: "100-200" → 100 (merret vlera e parë)
-- **Simbolet**: "23%" → 23 ose 0.23 (sipas kontekstit)
-
-#### 2. Transformimi i `female_male_ratio`
-Kjo kolonë ka formate të ndryshme dhe transformohet në `female_male_percent`:
-- **Format "X:Y"**: "42:58" → 42/(42+58) * 100 = 42%
-- **Format "X%"**: "45%" → 45
-- **Format "X:Y:Z"**: "42:58:00" → 42/(42+58) * 100 = 42%
-
-#### 3. Konvertimi në Tipe Numerike
-- **Integer**: Kolonat e renditjes (world_rank, cwur_world_rank, etj.)
-- **Float**: Rezultatet (teaching, research, citations), raportet, përqindjet
-
-#### 4. Menaxhimi i Vlerave të Pavlefshme
-- Vlerat që s'mund të konvertohen vendosen si `NaN`
-- Ruhen për trajtim në hapin e pastrimit (Hapi 4)
+### Proces
+1. Konvertohen kolonat numerike nga string në int/float
+2. Pastrohen vlerat (heqja e presjeve, përqindjeve, diapazoneve)
+3. Transformohet `female_male_ratio` në `female_male_percent`
+4. Vlerat e paparsueshme vendosen si NaN
 
 ### Kolona të Modifikuara
 
@@ -182,154 +84,32 @@ Për çdo kolonë numerike:
 2. Nxjerr numrin e parë nga diapazonet: "100-200" → 100
 3. Konverton përqindje: "14%" → 14.0 (ose 0.14 për raporte)
 
-### Output
-
-**Skedar:** Output i përkohshëm (përdoret si input për Hapin 3)
-
-**Ndryshimet:**
-- **Kolona të hequra:** `female_male_ratio` 
-- **Kolona të krijuara:** `female_male_percent` (përqindja e studentëve femra)
-- **Kolona totale:** 25 (e njëjta, por `female_male_ratio` zëvendësohet)
-- **Rreshta:** 3,895 (të pandryshuara)
-
-**Tipet e Konvertuara:**
-```
-INTEGER kolonat:
-- world_rank, cwur_world_rank, cwur_national_rank
-- Të gjitha kolonat CWUR ranking (quality_of_education, alumni_employment, etj.)
-
-FLOAT kolonat:  
-- teaching, international, research, citations, income, total_score
-- num_students, student_staff_ratio
-- international_students (nga "23%" → 0.23)
-- female_male_percent (e re)
-- cwur_score
-```
-
-**Shembuj Transformimesh:**
-```
-Parë:    "1,234"       → Pas: 1234.0
-Parë:    "100-200"     → Pas: 100
-Parë:    "14%"         → Pas: 0.14
-Parë:    "42:58"       → Pas: 42.0 (female_male_percent)
-Parë:    "-"           → Pas: NaN
-```
-
-**Rezultati:** Dataset me tipe numerike të sakta, gati për filtrimin dhe pastrimin
+**Rezultati:** Dataset i pastër me tipet e duhura për analizë
 
 ---
 
 ## Hapi 3: Filtrimi i Viteve (`3rd_step-filtering_years`)
 
 ### Përshkrim
-Ky hap filtron datasetin për të mbajtur vetëm vitet që kanë të dhëna nga të dy burimet (THE dhe CWUR), duke siguruar një dataset të balancuar për krahasim.
+Ky hap filtron datasetin për të mbajtur vetëm vitet 2012-2015, duke hequr 2011 dhe 2016 sepse ato nuk kanë të dhëna CWUR.
 
-### Arsyeja e Filtrimit
-
-**Disponueshmëria e të Dhënave:**
-- **Times Higher Education (THE)**: 2011, 2012, 2013, 2014, 2015, 2016
-- **Center for World University Rankings (CWUR)**: 2012, 2013, 2014, 2015
-
-**Problemi:** 
-- Viti 2011: Ka vetëm të dhëna THE (kolonat CWUR do të jenë të gjitha NaN)
-- Viti 2016: Ka vetëm të dhëna THE (kolonat CWUR do të jenë të gjitha NaN)
-
-**Zgjidhja:**
-Mbajmë vetëm vitet 2012-2015 ku kemi coverage të plotë nga të dy sistemet e renditjes.
-
-### Procesi
-
-```python
-df_filtered = df[df['year'].isin([2012, 2013, 2014, 2015])]
-```
-
-### Output
-
-**Rreshta të hequra:**
-- Viti 2011: ~500 rreshta (vetëm THE)
-- Viti 2016: ~800 rreshta (vetëm THE)  
-- **Total hequr:** ~1,300 rreshta
-
-**Dataset i Filtruar:**
-- **Rreshta:** ~2,595 (nga 3,895)
-- **Kolona:** 25 (të pandryshuara)
-- **Vite:** 4 (2012, 2013, 2014, 2015)
-- **Shpërndarja për vit:** ~650 rreshta për çdo vit
-
-**Përfitimi:** Dataset i balancuar me të dhëna nga të dy burimet për çdo universitet në çdo vit
+### Kolona e Modifikuar
+- `year` - Filtruar për të përmbajtur vetëm [2012, 2013, 2014, 2015]
 
 
 ## Hapi 4: Pastrimi dhe Imputimi (`4th_step-data_cleaning`)
 
 ### Përshkrim
-Ky është hapi më kritik i përgatitjes së të dhënave, ku kryhet pastrimi intensiv, menaxhimi i vlerave munguese me teknika të sofistikuara imputimi, dhe standardizimi i strukturës së datasetit.
+Ky hap kryen pastrim të avancuar të të dhënave, imputim të vlerave munguese dhe përmirësim të konsistencës.
 
-### Input
-- **Rreshta:** ~2,595
-- **Kolona:** 25
-- **Problemi kryesor:** Mungesa të larta në disa kolona (>50%)
-
-### Procesi i Detajuar
-
-#### 1. Analiza e Mungesave
-Identifikohen kolonat me mungesa të larta:
-- `total_score`: >45% mungesë
-- `income`: >60% mungesë  
-- `female_male_percent`: >50% mungesë
-
-**Vendimi:** Këto kolona hiqen sepse imputimi do të krijonte bias të madh
-
-#### 2. Plotësimi i Kolonave të Renditjes
-Nëse një universitet ka renditje në një sistem por jo në tjetrin, përdorim renditjen ekzistuese:
-```python
-world_rank = world_rank.fillna(cwur_world_rank)
-cwur_world_rank = cwur_world_rank.fillna(world_rank)
-```
-
-#### 3. Imputimi Hierarkik (3 nivele)
-
-**Niveli 1 - Imputimi për Universitet:**
-Për çdo universitet, përdorim medianën e vlerave të tij historike (2012-2015):
-```python
-Për çdo universitet:
-  për çdo kolonë numerike:
-    median_vlera = median(vlerat e këtij universiteti në të gjitha vitet)
-    zëvendëso NaN me median_vlera
-```
-*Shembull:* Nëse MIT ka `teaching` = [95, NaN, 96, 94], NaN-i plotësohet me median(95,96,94) = 95
-
-**Niveli 2 - Imputimi për Shtet:**  
-Nëse universiteti nuk ka të dhëna historike, përdorim medianën e shtetit:
-```python
-Për çdo shtet:
-  për çdo kolonë numerike:
-    median_vlera = median(të gjitha universitetet në këtë shtet)
-    zëvendëso NaN me median_vlera
-```
-
-**Niveli 3 - Imputimi Global:**
-Për vlerat e mbetura, përdorim medianën globale:
-```python
-Për çdo kolonë:
-  median_global = median(e gjithë kolona)
-  zëvendëso NaN të mbetura me median_global
-```
-
-#### 4. Konvertimi i Tipave
-Kolonat CWUR konvertohen në integer (pas imputimit):
-```python
-cwur_world_rank → int
-cwur_quality_of_education → int
-...
-```
-
-#### 5. Heqja e Rreshtave të Pavlefshme
-Hiqen rreshtat që ende nuk kanë as `world_rank` as `cwur_world_rank` (universitete pa asnjë renditje).
-
-### Kolona të Hequra (3 kolona)
-1. `total_score` - >45% mungesë
-2. `income` - >60% mungesë
-3. `female_male_percent` - >50% mungesë
+### Proces
+1. Normalizohen emrat e kolonave (lowercase, underscore)
+2. Hiqen kolonat me mungesa të larta (>45-70%): `total_score`, `female_male_percent`, `income`
+3. Plotësohen vlerat munguese në kolonat e renditjes (world_rank ↔ cwur_world_rank)
+4. Imputimi me medianë për çdo universitet (bazuar në të dhënat historike)
+5. Imputimi global me medianë për vlerat e mbetura
+6. Konvertohen kolonat CWUR në integer
+7. Hiqen rreshtat pa të dhëna renditjeje
 
 ### Formulat e Imputimit
 
@@ -353,318 +133,100 @@ world_rank = fillna(cwur_world_rank)
 cwur_world_rank = fillna(world_rank)
 ```
 
-### Output
-
-**Skedar:** `cleaned_university_data.csv`
-
-**Dimensionet:**
-- **Rreshta:** 2,895 (1 header + 2,894 rreshta të dhënash)
-- **Kolona:** 22 (nga 25, -3 të hequra)
-- **Mungesa të mbetura:** <1% për shumicën e kolonave
-
-**Struktura e Kolonave (22 total):**
-```
-1.  world_rank                    [int - Pozicioni THE]
-2.  university_name                [string - Emri]
-3.  country                        [string - Shteti]
-4.  teaching                       [float - THE mësimdhënie 0-100]
-5.  international                  [float - THE ndërkombëtar 0-100]
-6.  research                       [float - THE kërkime 0-100]
-7.  citations                      [float - THE citime 0-100]
-8.  num_students                   [float - Numri studentëve]
-9.  student_staff_ratio            [float - Raporti student-staf]
-10. international_students         [float - % studentë ndërkombëtarë]
-11. year                           [int - Viti 2012-2015]
-12. cwur_world_rank                [int - Pozicioni CWUR]
-13. cwur_national_rank             [int - Pozicioni kombëtar]
-14. cwur_quality_of_education      [int - Renditja cilësia arsimit]
-15. cwur_alumni_employment         [int - Renditja punësimi]
-16. cwur_quality_of_faculty        [int - Renditja fakulteti]
-17. cwur_publications              [int - Renditja publikime]
-18. cwur_influence                 [int - Renditja influenca]
-19. cwur_citations                 [int - Renditja citime]
-20. cwur_broad_impact              [int - Renditja ndikimi]
-21. cwur_patents                   [int - Renditja patenta]
-22. cwur_score                     [float - Rezultati CWUR]
-```
-
-**Cilësia e të Dhënave:**
-- Mungesa < 1% për kolonat kryesore (teaching, research, citations)
-- Të gjitha universitetet kanë të paktën një renditje (THE ose CWUR)
-- Tipet numerike të sakta dhe konsistente
-- Dataset i balancuar për 4 vite (2012-2015)
-
-**Rezultati:** Dataset i pastër, konsistent, dhe i gatshëm për analizë dhe modele statistikore
+**Rezultati:** Dataset i pastër me mungesa minimale
 
 ---
 
-## Hapi 5: Mostrimi dhe Inxhinieria e Karakteristikave
+## Hapi 5: Mostrimi
 
 ### Përshkrim
-Ky hap krijon një kampion të stratifikuar për vit (për efikasëri në analizë) dhe pasurohet me karakteristika të reja anal itike të derizuara nga të dhënat ekzistuese. Këto karakteristika të reja ofrojnë perspektiva të thelluara për performancën, konsistencën dhe trajektoren e universiteteve.
+Ky hap krijon një kampion të stratifikuar (20% për vit) dhe krijon karakteristika të reja për analizë.
 
-### Input
-- **Skedar:** `cleaned_university_data.csv`
-- **Rreshta:** 2,895
-- **Kolona:** 22
+### Proces
 
-### Procesi i Detajuar
+#### A. Mostrimi (`sampling.py`)
+1. Krijon kampion 20% të stratifikuar për vit (random_state=42)
+2. Ruan `sampled_dataset.csv`
 
-#### A. Mostrimi i Stratifikuar (`sampling.py`)
-
-**Objektivi:** Krijon një kampion 20% duke ruajtur shpërndarja proporcionale për çdo vit.
-
-**Mëtoda:**
-```python
-sampled_df = full_df.groupby('year', group_keys=False)
-                    .sample(frac=0.2, random_state=42)
+**Formula e kampionimit:**
 ```
-
-**Arsyeja:**
-- Redukton madhësinë e datasetit për shpejtuar analizën dhe vizualizimet
-- Ruan përfaqësim proporcional për çdo vit (2012-2015)
-- random_state=42 siguron riprodhueshmori (rezultate konsistente)
-
-**Output i Kampionit:**
-- **Skedar:** `sampled_dataset.csv`
-- **Rreshta:** 579 (20% e 2,895)
-- **Shpërndarja për vit:** ~145 rreshta për çdo vit
-- **Kolona:** 22 (të pandryshuara)
+për çdo vit:
+  sample = df[df['year'] == year].sample(frac=0.2, random_state=42)
+```
 
 #### B. Inxhinieria e Karakteristikave (`feature_engineering.py`)
 
-**Objektivi:** Krijon 17 karakteristika të reja që kapin dimensione të nd ryshme të performancës universiteteve.
+**Kolonat e Krijuara:**
 
-**Karakteristikat e Krijuara (17 të reja):**
+1. **`rank_consistency_std`** - Devijimi standard i renditjes botërore për universitet
+   - **Formula:** `std(world_rank për çdo universitet nëpër vite)`
 
-**1. Metrika të Konsistencës:**
-
-1. **`rank_consistency_std`** (float)
-   - Devijimi standard i `world_rank` për çdo universitet nëpër 4 vite
-   - **Formula:** `std(world_rank_2012, world_rank_2013, world_rank_2014, world_rank_2015)`
-   - **Interpretim:** I ulët = konsistent, i lartë = i paqendëruëshëm
-   - **Shembull:** MIT: std=2.5 (shumë konsistent), University X: std=45 (variabil)
-
-2. **`consistency_score`** (float 0-1)
-   - Rezultat i normalizuar i konsistencës  
+2. **`consistency_score`** - Rezultati i konsistencës (invers i rank_consistency_std)
    - **Formula:** `1 / (1 + rank_consistency_std)`
-   - **Interpretim:** 1 = perfect konsistent, ~0 = shumë variabil
-   - **Shembull:** 0.95 = shumë i qëndrueshëm, 0.30 = i paqendëruëshëm
 
-**2. Indekse Kompozite:**
+3. **`research_index`** - Indeksi i kërkimeve
+   - **Formula:** `mean(research, citations)`
 
-3. **`research_index`** (float 0-100)
-   - Indeksi i kërkimeve dhe impact-it shkencor
-   - **Formula:** `(research + citations) / 2`
-   - **Komponentet:** THE research score + THE citations score
+4. **`teaching_index`** - Indeksi i mësimdhënies
+   - **Formula:** `mean(teaching, international)`
 
-4. **`teaching_index`** (float 0-100)
-   - Indeksi i cilësisë së mësimdhënies dhe hapës në globale
-   - **Formula:** `(teaching + international) / 2`
-   - **Komponentet:** THE teaching score + THE international outlook
+5. **`global_index`** - Indeksi global
+   - **Formula:** `mean(research_index, teaching_index)`
 
-5. **`global_index`** (float 0-100)
-   - Indeksi total i performancës (kërkim + mësimdhënie)
-   - **Formula:** `(research_index + teaching_index) / 2`
-   - **Përdorimi:** Metrikë e përgjithshme për krahasim
+6. **`rank_change`** - Ndryshimi i renditjes vit pas viti
+   - **Formula:** `world_rank[year] - world_rank[year-1]` (për çdo universitet)
 
-**3. Analiza e Trajektores:**
+7. **`trajectory`** - Kategoria e trajektores
+   - **Formula:** 
+     - Nëse `rank_change <= -10`: "rising"
+     - Nëse `rank_change >= 10`: "declining"
+     - Përndryshe: "stable"
 
-6. **`rank_change`** (int)
-   - Ndryshimi i renditjes nga viti i mëparshëm
-   - **Formula:** `world_rank[year] - world_rank[year-1]`
-   - **Interpretim:** Negativ = përmirësim (renditje më e mirë), Pozitiv = renie
-   - **Shembull:** -15 = përmirësuar 15 vende, +20 = rene 20 vende
+8. **`region`** - Rajoni (bazuar në shtet)
+   - **Formula:** Hartim nga shteti në rajon (USA/Canada → "North America", etj.)
 
-7. **`trajectory`** (string)
-   - Klasifikimi i trendit të universitetit
-   - **Formula:**
-     ```python
-     if rank_change <= -10: "rising"      # Përmirësim i konsideruëshëm
-     elif rank_change >= 10: "declining"  # Renie e konsiderueshme
-     else: "stable"                      # Pak ndryshim
-     ```
-   - **Vlerat:** "rising", "stable", "declining"
+9. **`diversity_index`** - Indeksi i diversitetit
+   - **Formula:** `mean(international_students_normalized, inverted_student_staff_ratio)`
+   - Ku `inverted_ratio = 1 - ((student_staff_ratio - min) / (max - min))`
 
-**4. Klasifikime Gjeografike:**
+10. **`research_index_z`** - Z-score i research_index
+    - **Formula:** `(research_index - mean(research_index)) / std(research_index)`
 
-8. **`region`** (string)
-   - Rajoni gjeografik i universitetit
-   - **Mëtoda:** Mapping nga `country` në regjione
-   - **Vlerat:** "North America", "Europe", "Asia", "Oceania", "Latin America", "Africa"
-   - **Shembull:** USA/Canada → "North America", UK/Germany → "Europe"
+11. **`teaching_index_z`** - Z-score i teaching_index
+    - **Formula:** `(teaching_index - mean(teaching_index)) / std(teaching_index)`
 
-**5. Indeksi i Diversitetit:**
+12. **`rank_tier`** - Nivel i renditjes
+    - **Formula:** Kategorizim në: "Top 100", "101–200", "201–500", "501+"
 
-9. **`diversity_index`** (float 0-1)
-   - Matje e diversitetit ndërkombëtar dhe raporti student-staf
-   - **Formula:** Mesatarja e `international_students` (normalized) dhe `inverted_student_staff_ratio`
-   - **Interpretim:** I lartë = më ndërkombëtar dhe raport më i mirë staf-student
+13. **`performance_category`** - Kategoria e performancës
+    - **Formula:** Kategorizim i `teaching_index`: "Low" (<40), "Medium" (40-60), "High" (>60)
 
-**6. Z-Scores (Standardizim):**
+14. **`size_category`** - Kategoria e madhësisë
+    - **Formula:** Kategorizim i `num_students` bazuar në quantiles: "Small", "Medium", "Large"
 
-10. **`research_index_z`** (float)
-    - Z-score i `research_index`
-    - **Formula:** `(research_index - μ) / σ`
-    - **Interpretim:** Sa devijime standarde larg mesatares
+15. **`is_top_100`** - Flag për top 100
+    - **Formula:** `world_rank <= 100` (boolean)
 
-11. **`teaching_index_z`** (float)
-    - Z-score i `teaching_index`
-    - **Formula:** `(teaching_index - μ) / σ`
+16. **`is_research_intensive`** - Flag për kërkim-intensiv
+    - **Formula:** `research_index >= 70` (boolean)
 
-**7. Kategorizime (Binning):**
+17. **`is_rising`** - Flag për universitet në rritje
+    - **Formula:** `trajectory == "rising"` (boolean)
 
-12. **`rank_tier`** (string)
-    - Niveli i renditjes
-    - **Vlerat:** "Top 100", "101-200", "201-500", "501+"
-
-13. **`performance_category`** (string)
-    - Kategoria e performancës në mësimdhënie
-    - **Krit eret:** 
-      - "Low": teaching_index < 40
-      - "Medium": 40 ≤ teaching_index ≤ 60
-      - "High": teaching_index > 60
-
-14. **`size_category`** (string)
-    - Kategoria e madhësisë bazuar në `num_students`
-    - **Mëtoda:** Quantile-based (33%, 66%)
-    - **Vlerat:** "Small", "Medium", "Large"
-
-**8. Flamurë Binarë (Flags):**
-
-15. **`is_top_100`** (int 0/1)
-    - A është në top 100 botëror?
-    - **Formula:** `1 if world_rank <= 100 else 0`
-
-16. **`is_research_intensive`** (int 0/1)
-    - A është universitet kërkim-intensiv?
-    - **Formula:** `1 if research_index >= 70 else 0`
-
-17. **`is_rising`** (int 0/1)
-    - A është në trajektore rëritjeje?
-    - **Formula:** `1 if trajectory == "rising" else 0`
-
-### Output
-
-**Skedar:** `university_data_engineered.csv`
-
-**Dimensionet:**
-- **Rreshta:** 2,895 (e gjithë dataseti, jo kampioni)
-- **Kolona:** 39 (22 origjinale + 17 të reja)
-
-**Struktura e Kolonave (39 total):**
-```
-KOLONA ORIGJINALE (22):
-1-22: [Njësoj si Hapi 4]
-
-KOLONA TË REJA (17):
-23. rank_consistency_std        [float - Devijimi std i renditjes]
-24. consistency_score            [float 0-1 - Rezultati konsistence]
-25. research_index               [float 0-100 - Indeksi kërkimeve]
-26. teaching_index               [float 0-100 - Indeksi mësimdhënies]
-27. global_index                 [float 0-100 - Indeksi global]
-28. rank_change                  [int - Ndryshimi vit-pas-viti]
-29. trajectory                   [string - rising/stable/declining]
-30. region                       [string - Rajoni gjeografik]
-31. diversity_index              [float 0-1 - Indeksi diversitetit]
-32. research_index_z             [float - Z-score research]
-33. teaching_index_z             [float - Z-score teaching]
-34. rank_tier                    [string - Top 100/101-200/etj.]
-35. performance_category         [string - Low/Medium/High]
-36. size_category                [string - Small/Medium/Large]
-37. is_top_100                   [int 0/1 - Flamur top 100]
-38. is_research_intensive        [int 0/1 - Flamur kërkim-intensiv]
-39. is_rising                    [int 0/1 - Flamur në rritje]
-```
-
-**Shembuj Vlerash:**
-```
-Harvard University, 2015:
-  research_index: 99.7 (ekselentë)
-  teaching_index: 96.8 (ekselentë)
-  consistency_score: 0.99 (shumë konsistent)
-  trajectory: "stable" (gjithmonë në top)
-  region: "North America"
-  is_top_100: 1
-  is_research_intensive: 1
-```
-
-**Rezultati:** Dataset i pasuruar me metrika analitike për studime të thelluara të performancës, trendeve dhe karakteristikave të universiteteve
+**Rezultati:** Dataset me karakteristika të reja për analizë dhe një kampion prej 20%
 
 ---
 
 ## Hapi 6: Agregimi (`6th_step-aggregation`)
 
 ### Përshkrim
-Ky hap transformon të dhënat nga nivel universiteti në nivel shtet-vit, duke agreguar statistika për të krahasuar performancën e shteteve në periudha kohore. Krijim metrika të reja të derizuara para agregimit për analizë më të thellë.
+Ky hap agregon të dhënat sipas shtetit dhe vitit, duke llogaritur statistika për çdo kombinim shtet-vit.
 
-### Input
-- **Skedar:** `cleaned_university_data.csv`
-- **Granularitet:** Nivel universiteti (2,895 rreshta)
-- **Kolona:** 22
-
-### Procesi i Detajuar
-
-#### 1. Normalizimi i Shteteve
-Standardizon emrat e shteteve:
-```python
-"USA" → "United States of America"
-```
-
-#### 2. Krijimi i Karakteristikave të Derizuara
-
-Para agregimit, krijohen 3 metrika të reja:
-
-**a) `rank_gap`** - Diferenca midis renditjeve THE dhe CWUR
-```python
-rank_gap = world_rank - cwur_world_rank
-```
-- **Negativ**: THE rendit më mirë (rank më i ulët = më mirë)
-- **Pozitiv**: CWUR rendit më mirë
-- **Zero**: Renditje identike
-
-**b) `faculty_efficiency`** - Efikasiteti i fakultetit
-```python
-faculty_efficiency = cwur_quality_of_faculty / student_staff_ratio
-```
-- Sa cilësië fakulteti për çdo njësi raporti student-staf
-- I lartë = fakultet cilësor me raport të mirë
-
-**c) `global_influence_index`** - Indeksi i ndikimit global
-Përdor z-scores për vit për të normalizuar:
-```python
-Për çdo vit:
-  citations_z = (citations - mean) / std
-  cwur_influence_z = (cwur_influence - mean) / std
-  cwur_citations_z = (cwur_citations - mean) / std
-  
-global_influence_index = mean(citations_z, cwur_influence_z, cwur_citations_z)
-```
-- Kombinon impactin nga të dy sistemet e renditjes
-- I standardizuar për krahasim fair në vite
-
-#### 3. Agregimi sipas Shteti dhe Vitit
-
-Grouping: `groupby(['country', 'year'])`
-
-**Statistikat e Agreguara:**
-
-**Renditjet (mean, median, min):**
-- `world_rank` → `world_rank_mean`, `world_rank_median`, `the_best_world_rank` (min)
-- `cwur_world_rank` → `cwur_world_rank_mean`, `cwur_world_rank_median`, `the_best_cwur_world_rank` (min)
-
-**Rezultatet Akademike (mean):**
-- `teaching`, `international`, `citations`, `cwur_score`
-- Të gjitha kolonat CWUR (quality_of_education, alumni_employment, etj.)
-
-**Statistikat e Studentëve:**
-- `total_students_covered`: sum(num_students) - Total studentë të mbuluar
-- `avg_students_per_university`: mean(num_students)
-- `avg_international_student_share`: mean(international_students)
-- `student_staff_ratio_mean`: mean(student_staff_ratio)
-
-**Metrikat e Derizuara:**
-- `rank_gap_mean`, `faculty_efficiency_mean`, `global_influence_index_mean`
+### Proces
+1. Normalizohen emrat e shteteve
+2. Krijohen kolona të derizuara
+3. Agregohen të dhënat me groupby(country, year)
+4. Llogariten statistika (mesatare, medianë, minimum)
 
 ### Kolona të Krijuara
 
@@ -692,117 +254,18 @@ Për çdo kombinim (shtet, vit), llogariten:
 - `avg_international_student_share` (mean i international_students)
 - `student_staff_ratio_mean`
 
-### Output
-
-**Skedar:** `country_year_summary.csv`
-
-**Dimensionet:**
-- **Granularitet:** Shtet-Vit (transformim nga nivel universiteti)
-- **Rreshta:** ~280 kombinime unike (shtet, vit)
-- **Kolona:** ~28 kolona statistikore
-- **Periudha:** 2012-2015
-
-**Struktura e Kolonave (~28 total):**
-```
-IDENTIFIKUES (2):
-1. country                           [string - Shteti]
-2. year                              [int - Viti]
-
-RENDITJET THE (3):
-3. world_rank_mean                   [float - Mesatarja e renditjes THE]
-4. world_rank_median                 [float - Mediana e renditjes THE]
-5. the_best_world_rank               [int - Renditja më e mirë THE]
-
-RENDITJET CWUR (3):
-6. cwur_world_rank_mean              [float - Mesatarja e renditjes CWUR]
-7. cwur_world_rank_median            [float - Mediana e renditjes CWUR]
-8. the_best_cwur_world_rank          [int - Renditja më e mirë CWUR]
-
-RENDIMENTI AKADEMIK (4):
-9. teaching_mean                     [float - Mesatarja e mësimdhënies]
-10. international_mean               [float - Mesatarja e perspektivës ndërkombëtare]
-11. citations_mean                   [float - Mesatarja e citimeve]
-12. cwur_score_mean                  [float - Mesatarja e rezultatit CWUR]
-
-METRIKA CWUR (8):
-13. cwur_quality_of_education_mean   [float - Mes. cilësia arsimit]
-14. cwur_alumni_employment_mean      [float - Mes. punësimi alumni]
-15. cwur_quality_of_faculty_mean     [float - Mes. cilësia fakulteti]
-16. cwur_publications_mean           [float - Mes. publikime]
-17. cwur_influence_mean              [float - Mes. influenca]
-18. cwur_citations_mean              [float - Mes. citime CWUR]
-19. [cwur_broad_impact, cwur_patents] [Nëse të pranishme]
-
-STATISTIKA STUDENTËVE (4):
-20. total_students_covered           [int - Total studentë në shtet]
-21. avg_students_per_university      [float - Mes. studentë për universitet]
-22. avg_international_student_share  [float - Mes. % studentë ndërkombëtarë]
-23. student_staff_ratio_mean         [float - Mes. raport student-staf]
-
-METRIKA TË DERIZUARA (3):
-24. rank_gap_mean                    [float - Mes. diferenca THE-CWUR]
-25. faculty_efficiency_mean          [float - Mes. efikasiteti fakulteti]
-26. global_influence_index_mean      [float - Mes. ndikimi global]
-```
-
-**Shembull Rreshti:**
-```
-country: United States of America
-year: 2015
-world_rank_mean: 145.3
-the_best_world_rank: 1 (Harvard)
-cwur_world_rank_mean: 152.8
-the_best_cwur_world_rank: 1 (Harvard)
-teaching_mean: 68.4
-citations_mean: 72.1
-total_students_covered: 1,850,000
-avg_students_per_university: 25,342
-avg_international_student_share: 0.18 (18%)
-rank_gap_mean: -7.5 (THE rendit mesatarisht më mirë)
-faculty_efficiency_mean: 4.2
-```
-
-**Përdorimet:**
-- Krahasimi i performancës së shteteve në kohë
-- Identifikimi i shteteve me universitetet më të mira
-- Analiza e trendeve kombetare (2012-2015)
-- Vlerësimi i sistemeve arsimore kombetare
-
-**Rezultati:** Dataset agreguar për analizë komparative në nivel kombëtar dhe temporal
+**Rezultati:** Dataset agreguar me statistika për çdo shtet dhe vit
 
 ---
 
 ## Hapi 7: Përzgjedhja dhe Krijimi i Karakteristikave (`7th_step-feature_selection_creation`)
 
 ### Përshkrim
-Ky hap optimizon strukturen e datasetit duke hequr karakteristika me vlerë të ulët anal itike (redundante ose me pak informacion) dhe duke krijuar karakteristika të reja më të dobishme që kombinojnë informacion nga burime të ndryshme.
+Ky hap heq kolonat redundante dhe krijon karakteristika të reja më informative.
 
-### Input
-- **Skedar:** `cleaned_university_data.csv`
-- **Rreshta:** 2,895
-- **Kolona:** 22
-
-### Procesi i Detajuar
-
-#### 1. Analiza dhe Heqja e Karakteristikave
-
-**Kolonat e Hequra (3):**
-
-1. **`cwur_national_rank`** - Redundante
-   - **Arsyeja:** Varet nga `country` dhe `cwur_world_rank`
-   - Nuk ofron informacion shtese për analiza globale
-
-2. **`cwur_broad_impact`** - Korrelacion i lartë
-   - **Arsyeja:** I korreluar fort me `cwur_influence` dhe `cwur_citations`
-   - Redundant në pranincë të metrikave të tjera të impactit
-
-3. **`cwur_patents`** - Mungesa të larta
-   - **Arsyeja:** Shumë universitete nuk kanë të dhëna patentash
-   - Jo përfaqësuese për të gjitha llojet e universiteteve
-
-#### 2. Krijimi i Karakteristikave të Reja
-
-**Karakteristikat e Krijuara (5):**
+### Proces
+1. Hiqen kolonat redundante: `cwur_national_rank`, `cwur_broad_impact`, `cwur_patents`
+2. Krijohen karakteristika të reja të derizuara
 
 ### Kolona të Krijuara
 
@@ -819,282 +282,77 @@ Ky hap optimizon strukturen e datasetit duke hequr karakteristika me vlerë të 
 4. **`global_influence_index`** - Indeksi i ndikimit global
    - **Formula:** `mean(citations, cwur_influence, cwur_citations)`
 
-5. **`high_international_ratio`** - Flag për raport të lartë ndërkombëtar (int 0/1)
+5. **`high_international_ratio`** - Flag për raport të lartë ndërkombëtar
    - **Formula:** `1 nëse international_students > 0.30, përndryshe 0`
-   - **Interpretim:** Identifikon universitete me >30% studentë ndërkombëtarë
-   - **Përdorimi:** Filtrim i shpejtë për universitete të diversifikuara
 
-### Output
-
-**Skedar:** `feature_selected_created_university_data.csv`
-
-**Dimensionet:**
-- **Rreshta:** 2,895 (të pandryshuara)
-- **Kolona:** 24 (22 - 3 + 5)
-- **Ndryshimi:** -3 redundante, +5 të reja
-
-**Struktura e Kolonave (24 total):**
-```
-KOLONA ORIGJINALE TË MBETURA (19):
-1.  world_rank
-2.  university_name
-3.  country
-4.  teaching
-5.  international
-6.  research
-7.  citations
-8.  num_students
-9.  student_staff_ratio
-10. international_students
-11. year
-12. cwur_world_rank
-13. cwur_quality_of_education
-14. cwur_alumni_employment
-15. cwur_quality_of_faculty
-16. cwur_publications
-17. cwur_influence
-18. cwur_citations
-19. cwur_score
-
-KOLONA TË REJA (5):
-20. rank_gap                     [int - Diferenca THE-CWUR]
-21. research_efficiency_per_1k   [float - Efikasiteti për 1000 studentë]
-22. faculty_efficiency           [float - Efikasiteti fakulteti]
-23. global_influence_index       [float - Indeksi i ndikimit global]
-24. high_international_ratio     [int 0/1 - >30% studentë ndërkombëtarë]
-```
-
-**Përfitimet:**
-- Dataset më i kompakt (heqje redundancash)
-- Metrika më informative (karakteristika të derizuara)
-- Kombinim informacioni nga THE dhe CWUR
-- Efikasië më e lartë për modele ML
-
-**Rezultati:** Dataset i optimizuar me karakteristika të zgjedhura dhe të pasurura
+**Rezultati:** Dataset me karakteristika optimizuar dhe të derizuara
 
 ---
 
 ## Hapi 8: Diskretizimi, Binarizimi dhe Transformimi (`8th-step-discret_binar_transform`)
 
 ### Përshkrim
-Ky është hapi final i përgatitjes së të dhënave, ku krijohen forma të ndryshme të karakteristikave ekzistuese për të mbeshetur analiza të nd ryshme: diskretizim (për kategorizim), binarizim (për flamurë), transformime relative (për krahasime kontekstuale), dhe standardizim (për modele ML).
+Ky hap konverton vlerat e vazhdueshme në kategorike, krijon flage binare dhe transformon të dhënat për krahasim kontekstual.
 
-### Input
-- **Skedar:** `feature_selected_created_university_data.csv`
-- **Rreshta:** 2,895
-- **Kolona:** 24
+### Proces
 
-### Procesi i Detajuar
+#### A. Diskretizimi
 
-#### A. Diskretizimi (Binning)
+1. **`teaching_level`** - Niveli i mësimdhënies
+   - **Formula:** Kategorizim në 3 grupe (quantile): "Low", "Medium", "High"
 
-**Objektivi:** Konverton vlera të vazhdueshme numerike në kategori diskrete për analiza kategorike dhe vizualizime.
+2. **`citations_level`** - Niveli i citimeve
+   - **Formula:** Kategorizim në 3 grupe (quantile): "Low", "Medium", "High"
 
-**Mëtoda:** Quantile-based binning (ndarje në 3 grupe me numër të barabartë elementesh)
+#### B. Binarizimi
 
-**Karakteristikat e Diskretizuara (2):**
+1. **`top100_times`** - Flag për top 100 në THE
+   - **Formula:** `1 nëse world_rank <= 100, përndryshe 0`
 
-1. **`teaching_level`** (string)
-   - Kategorizimi i rezultatit THE teaching
-   - **Formula:** 
-     ```python
-     quantiles = teaching.quantile([0.33, 0.67])
-     if teaching < quantiles[0.33]: "Low"
-     elif teaching < quantiles[0.67]: "Medium"
-     else: "High"
-     ```
-   - **Vlerat:** "Low", "Medium", "High"
-   - **Shpërndarja:** ~33% në çdo kategori
-   - **Shembull:** teaching=45 → "Low", teaching=68 → "Medium", teaching=89 → "High"
+2. **`top100_cwur`** - Flag për top 100 në CWUR
+   - **Formula:** `1 nëse cwur_world_rank <= 100, përndryshe 0`
 
-2. **`citations_level`** (string)
-   - Kategorizimi i rezultatit THE citations
-   - **Formula:** Njësoj si `teaching_level`, por për kolonan `citations`
-   - **Vlerat:** "Low", "Medium", "High"
-   - **Përdorimi:** Identifikon universitete me impact të ulët/mesatar/të lartë shkencor
+3. **`high_international_ratio`** - (Ruhet nga hapi i mëparshëm)
 
-#### B. Binarizimi (Flamurë)
+#### C. Transformime Kontekstuale
 
-**Objektivi:** Krijon flamurë binarë (0/1) për identifikim të shpejtë të karakteristikave bin are.
+1. **`country_year_teaching_mean`** - Mesatarja e mësimdhënies për shtet-vit
+   - **Formula:** `mean(teaching) për çdo kombinim (country, year)`
 
-**Karakteristikat Binare (3):**
+2. **`country_year_citations_mean`** - Mesatarja e citimeve për shtet-vit
+   - **Formula:** `mean(citations) për çdo kombinim (country, year)`
 
-1. **`top100_times`** (int 0/1)
-   - A është në top 100 sipas THE?
-   - **Formula:** `1 if world_rank <= 100 else 0`
-   - **Përdorimi:** Filtrim i universiteteve elite sipas THE
+3. **`country_year_cwur_score_mean`** - Mesatarja e rezultatit CWUR për shtet-vit
+   - **Formula:** `mean(cwur_score) për çdo kombinim (country, year)`
 
-2. **`top100_cwur`** (int 0/1)
-   - A është në top 100 sipas CWUR?
-   - **Formula:** `1 if cwur_world_rank <= 100 else 0`
-   - **Përdorimi:** Filtrim i universiteteve elite sipas CWUR
-   - **Krahasim:** Disa universitete mund të jenë top 100 në njërin sistem por jo në tjetrin
-
-3. **`high_international_ratio`** (int 0/1)
-   - Ruhet nga Hapi 7
-   - Identifikon universitete me >30% studentë ndërkombëtarë
-
-#### C. Transformime Kontekstuale (Relative)
-
-**Objektivi:** Krijon metrika relative që krahasojnë çdo universitet me mesataren e shtetit të tij në atë vit.
-
-**Arsyeja:** Lejon krahasime fair - p.sh., një universitet me teaching=70 në USA (ku mesatarja është 75) mund të jetë nën standard, por në vend tjetër (ku mesatarja është 50) do të jetë ekselent.
-
-**Hapat:**
-
-**1. Llogaritja e Mesatareve Kontekstuale (3 kolona auxiliare):**
-
-1. **`country_year_teaching_mean`** (float)
-   - Mesatarja e `teaching` për çdo kombinim (country, year)
-   - **Formula:** `groupby(['country', 'year'])['teaching'].transform('mean')`
-
-2. **`country_year_citations_mean`** (float)
-   - Mesatarja e `citations` për çdo kombinim (country, year)
-   - **Formula:** `groupby(['country', 'year'])['citations'].transform('mean')`
-
-3. **`country_year_cwur_score_mean`** (float)
-   - Mesatarja e `cwur_score` për çdo kombinim (country, year)
-   - **Formula:** `groupby(['country', 'year'])['cwur_score'].transform('mean')`
-
-**2. Llogaritja e Vlerave Relative (3 kolona):**
-
-4. **`relative_teaching`** (float)
-   - Mësimdhënia relative ndaj mesatares kombëtare-vjetore
+4. **`relative_teaching`** - Mësimdhënia relative ndaj mesatares kombëtare
    - **Formula:** `teaching / country_year_teaching_mean`
-   - **Interpretim:**
-     - 1.0 = në mesatare
-     - 1.2 = 20% mbi mesataren kombëtare
-     - 0.8 = 20% nën mesataren kombëtare
 
-5. **`relative_citations`** (float)
-   - Citimet relative ndaj mesatares kombëtare-vjetore
+5. **`relative_citations`** - Citimet relative ndaj mesatares kombëtare
    - **Formula:** `citations / country_year_citations_mean`
-   - **Shembull:** 1.5 = 50% më shumë citime se mesatarja e shtetit
 
-6. **`relative_cwur_score`** (float)
-   - Rezultati CWUR relative
+6. **`relative_cwur_score`** - Rezultati CWUR relative
    - **Formula:** `cwur_score / country_year_cwur_score_mean`
-   - **Përdorimi:** Identifikon leaderë brenda çdo shteti
 
-#### D. Standardizimi (Z-Scores)
+#### D. Standardizimi (Z-score)
 
-**Objektivi:** Standardizon vlerat për të lejuar krahasime direkte midis karakteristikave me shkallë të ndryshme dhe për algoritme ML.
-
-**Formula Gjenerike:** `z = (x - μ) / σ`
-- μ = mesatarja e popullatrs
-- σ = devijimi standard
-- **Interpretim:** Sa devijime standarde larg mesatares
-  - z=0: në mesatare
-  - z=1: 1 devijim standard mbi mesataren
-  - z=-2: 2 devijime standarde nën mesataren
-
-**Karakteristikat e Standardizuara (5):**
-
-1. **`teaching_z`** (float)
-   - Z-score i `teaching`
+1. **`teaching_z`** - Z-score i mësimdhënies
    - **Formula:** `(teaching - mean(teaching)) / std(teaching)`
-   - **Përdorimi:** Krahasim i teaching scores në shkallë të standardizuar
 
-2. **`citations_z`** (float)
-   - Z-score i `citations`
+2. **`citations_z`** - Z-score i citimeve
    - **Formula:** `(citations - mean(citations)) / std(citations)`
-   - **Shembull:** z=2.5 tregon impact jashtezakonisht të lartë
 
-3. **`num_students_z`** (float)
-   - Z-score i `num_students`
+3. **`num_students_z`** - Z-score i numrit të studentëve
    - **Formula:** `(num_students - mean(num_students)) / std(num_students)`
-   - **Përdorimi:** Identifikon universitete jashtëzakonisht të mëdha ose të vogla
 
-4. **`relative_teaching_z`** (float)
-   - Z-score i `relative_teaching`
+4. **`relative_teaching_z`** - Z-score i mësimdhënies relative
    - **Formula:** `(relative_teaching - mean(relative_teaching)) / std(relative_teaching)`
-   - **Dallimi:** Standardizon performancën relative (jo absolute)
 
-5. **`relative_citations_z`** (float)
-   - Z-score i `relative_citations`
+5. **`relative_citations_z`** - Z-score i citimeve relative
    - **Formula:** `(relative_citations - mean(relative_citations)) / std(relative_citations)`
-   - **Përdorimi:** Identifikon outlierë brenda kontekstit kombëtar
 
-### Output Final
+**Rezultati:** Dataset final me karakteristika diskretizuara, binare dhe të standardizuara për analizë dhe vizualizim
 
-**Skedar:** `university_data_discretized_transformed.csv`
-
-**Dimensionet:**
-- **Rreshta:** 2,895 (të pandryshuara)
-- **Kolona:** 39 (24 nga Hapi 7 + 15 të reja)
-- **Periudha:** 2012-2015
-
-**Struktura e Kolonave (39 total):**
-```
-KOLONA ORIGJINALE (19):
-1-19: [Si në Hapin 7 - kolona bazike]
-
-KARAKTERISTIKA NGA HAPI 7 (5):
-20. rank_gap
-21. research_efficiency_per_1k
-22. faculty_efficiency
-23. global_influence_index
-24. high_international_ratio
-
-KARAKTERISTIKA TË REJA - HAPI 8 (15):
-
-DISKRETIZUARA (2):
-25. teaching_level               [string - Low/Medium/High]
-26. citations_level              [string - Low/Medium/High]
-
-BINARE (2):
-27. top100_times                 [int 0/1 - Top 100 THE]
-28. top100_cwur                  [int 0/1 - Top 100 CWUR]
-
-KONTEKSTUALE - MESATARE (3):
-29. country_year_teaching_mean   [float - Mesatarja kombëtare teaching]
-30. country_year_citations_mean  [float - Mesatarja kombëtare citations]
-31. country_year_cwur_score_mean [float - Mesatarja kombëtare cwur_score]
-
-RELATIVE (3):
-32. relative_teaching            [float - Raport ndaj mesatares kombëtare]
-33. relative_citations           [float - Raport ndaj mesatares kombëtare]
-34. relative_cwur_score          [float - Raport ndaj mesatares kombëtare]
-
-Z-SCORES (5):
-35. teaching_z                   [float - Z-score teaching]
-36. citations_z                  [float - Z-score citations]
-37. num_students_z               [float - Z-score numëri studentëve]
-38. relative_teaching_z          [float - Z-score relative teaching]
-39. relative_citations_z         [float - Z-score relative citations]
-```
-
-**Shembull Rreshti - Harvard University 2015:**
-```
-Kolona Bazike:
-  world_rank: 1
-  teaching: 99.7 | citations: 99.9
-  
-Diskretizuara:
-  teaching_level: "High" | citations_level: "High"
-  
-Binare:
-  top100_times: 1 | top100_cwur: 1
-  
-Kontekstuale:
-  country_year_teaching_mean: 68.5 (mesatarja USA 2015)
-  
-Relative:
-  relative_teaching: 1.45 (45% mbi mesataren USA)
-  relative_citations: 1.38 (38% mbi mesataren USA)
-  
-Z-Scores:
-  teaching_z: 2.89 (2.89 std mbi mesataren globale)
-  citations_z: 3.15 (performancë ekselente)
-  relative_teaching_z: 1.92 (leader kombëtar)
-```
-
-**Rezultati Final:** Dataset i plotë dhe i transformuar me:
-- 39 karakteristika (bazike + të derizuara + të transformuara)
-- Forma të ndryshme (numerike, kategorike, binare, relative, standardizuara)
-- Gati për analiza të avancuara, vizualizime komplekse, dhe Machine Learning
-- Mbeshtet krahasime absolute, relative, dhe kontekstuale
-- Të dhënat e pastruara, konsistente dhe të standardizuara
 
 ---
 
