@@ -714,6 +714,87 @@ world_rank,university_name,country,teaching,international,research,citations,num
 
 ---
 
+
+# University World Ranking – Power BI Report
+
+Raporti në **Power BI** ofron një analizë interaktive të renditjes botërore të universiteteve, duke krahasuar performancën e tyre sipas viteve, kontinenteve dhe shteteve, si dhe duke analizuar KPI-të kryesore akademike.
+
+---
+<img width="1272" height="718" alt="image" src="https://github.com/user-attachments/assets/4ec973fd-68ab-4349-9a16-895acfc204dd" />
+
+
+## Overview / Dashboard Kryesor
+
+Kjo faqe shërben si pamje përmbledhëse e të gjithë dataset-it.
+
+### KPI-të Kryesore
+- **Best University** – Universiteti më i renditur globalisht
+- **Median Rank** – Vlera mesatare e renditjes botërore
+- **Total Universities** – Numri total i universiteteve në dataset
+- **Countries** – Numri i shteteve të përfshira
+- **Continents** – Numri i kontinenteve të mbuluara
+
+### Vizualizime Kryesore
+- **Top 10 Universities (Best World Rank)** – Universitetet më të mira në botë
+- **Number of Students by Continent** – Shpërndarja e studentëve sipas kontinenteve
+- **Average University Score by Continent** – Krahasimi i score mesatar akademik sipas kontinenteve
+
+---
+<img width="1272" height="725" alt="image" src="https://github.com/user-attachments/assets/5c643975-dfa6-4376-aa50-7f5e41a7c8c9" />
+
+
+## Top 100 vs Other Universities
+
+Kjo faqe fokusohet në krahasimin midis universiteteve **Top 100** dhe pjesës tjetër.
+
+### Vizualizime
+- **Top 100 vs Not Top 100 (Donut Chart)** – Përqindja e universiteteve elitare
+- **Universities by Continent** – Numri i universiteteve për çdo kontinent
+- **Average World Rank by Continent** – Renditja mesatare botërore sipas kontinentit
+- **Top 100 Universities by Continent** – Shpërndarja e universiteteve Top 100
+- **Average Faculty Efficiency Score** – Efikasiteti mesatar i stafit akademik
+
+---
+
+<img width="1290" height="731" alt="image" src="https://github.com/user-attachments/assets/b87b552f-5a69-43d8-8b36-c5f867394c85" />
+
+
+## Country Analysis / Analiza sipas Shteteve
+
+Kjo faqe ofron analizë të detajuar në nivel shteti.
+
+### Vizualizime
+- **Average University Scores by Country**
+  - Teaching Score  
+  - Research Score  
+  - Citations Score  
+  - International Score  
+- **Average World Rank by Country** – Renditja mesatare botërore për çdo shtet
+- **Universities by Country (Map)** – Shpërndarja gjeografike e universiteteve
+- **World Rank by Year** – Ndryshimi i renditjes ndër vite
+
+---
+
+## Filtering & KPI Interaction (Shembull Praktik)
+
+Në raport demonstrohen dhe fuqinë e filtrimit dhe interaktivitetit në Power BI.
+
+### Slicers
+- **Year** – Filtron të dhënat sipas vitit
+- **Continent** – Filtron sipas kontinentit
+- **Country** – Filtron sipas shtetit
+
+### Ndikimi i Filtrimit
+- KPI-të (**Best University**, **Median Rank**, **Total Universities**) ndryshojnë në kohë reale
+- Të gjitha vizualizimet rifreskohen automatikisht
+- Mundëson analiza krahasuese dinamike (p.sh. Europa – 2013)
+
+<img width="1262" height="716" alt="image" src="https://github.com/user-attachments/assets/3634e274-5369-40dc-a00b-15ea7b1fd667" />
+
+---
+
+
+
 **Grupi:**  7  
 **Lënda:** Përgatitja dhe vizualizimi i të dhënave
 
